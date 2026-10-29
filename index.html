@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>de la Peña Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The de la Peña Lab at the University of New Mexico studies circular RNAs (circRNAs) in human pain-sensing neurons: how they shape chronic pain and the response to opioids.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: dark title band on every view, light reading body, 1200px column, hash-routed views in one file */
+:root{
+  --band:#0E1A24; --band-2:#1A2B38; --band-line:#2E4252; --band-ink:#FFFFFF; --band-muted:#C3CFD9; --band-nav:#D4DEE6;
+  --bg:#FFFFFF; --surface:#F2F6F8; --ink:#17222C; --muted:#4A5866; --line:#E4EAEF;
+  --link:#0B6E66; --link-hover:#07524C; --accent:#5FD3C3; --on-accent:#0E1A24;
+  --chip-bg:#FFF1D6; --chip-ink:#7A4A00; --ph:#E6ECF0; --ph-ink:#4A5866;
+  --display:'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --body:'IBM Plex Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --band:#07101A; --band-2:#13212C; --band-line:#263845; --band-muted:#B7C4CF; --band-nav:#CBD6DF;
+  --bg:#0B141B; --surface:#13212C; --ink:#E6EDF2; --muted:#A6B4C0; --line:#233440;
+  --link:#5FD3C3; --link-hover:#8DE6D9; --chip-bg:#3A2A0A; --chip-ink:#FFD58A; --ph:#1A2B38; --ph-ink:#A9B8C4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --band:#07101A; --band-2:#13212C; --band-line:#263845; --band-muted:#B7C4CF; --band-nav:#CBD6DF;
+  --bg:#0B141B; --surface:#13212C; --ink:#E6EDF2; --muted:#A6B4C0; --line:#233440;
+  --link:#5FD3C3; --link-hover:#8DE6D9; --chip-bg:#3A2A0A; --chip-ink:#FFD58A; --ph:#1A2B38; --ph-ink:#A9B8C4; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+a{color:var(--link)} a:hover{color:var(--link-hover)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.prose{max-width:70ch}
+
+.notice{background:var(--chip-bg);color:var(--chip-ink);font-size:14px}
+.notice .wrap{padding-block:8px}
+.chip{display:inline-block;font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.02em;background:var(--chip-bg);color:var(--chip-ink);border-radius:999px;padding:1px 9px;vertical-align:middle;white-space:nowrap}
+
+.top{background:var(--band);color:var(--band-ink)}
+.top .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+.brand{font-family:var(--display);font-size:24px;font-weight:700;color:var(--band-ink);text-decoration:none;letter-spacing:-.01em}
+.brand:hover{color:var(--band-ink)}
+nav.main{display:flex;flex-wrap:wrap;gap:2px 20px;font-size:15px;font-weight:500}
+nav.main a{color:var(--band-nav);text-decoration:none;padding:10px 0;border-bottom:2px solid transparent}
+nav.main a:hover{color:var(--band-ink)}
+nav.main a[aria-current="page"]{color:var(--band-ink);border-bottom-color:var(--accent)}
+
+.band{background:var(--band);color:var(--band-ink)}
+.band .wrap{padding-block:48px 64px}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.band h1{font-size:clamp(34px,5vw,48px);font-weight:700;letter-spacing:-.02em}
+.band .lead{color:var(--band-muted);font-size:19px;max-width:62ch}
+
+.hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center}
+.hero > .text{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.hero h1{font-size:clamp(38px,6vw,58px);line-height:1.05}
+.hero .ph{flex:1 1 380px;min-width:0;height:380px;background:var(--band-2);border:1px solid var(--band-line);color:var(--band-muted)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;text-decoration:none;min-height:44px}
+.btn.solid{background:var(--accent);color:var(--on-accent)} .btn.solid:hover{color:var(--on-accent);filter:brightness(1.06)}
+.btn.ghost{border:1px solid var(--band-line);color:var(--band-ink)} .btn.ghost:hover{color:var(--band-ink);border-color:var(--band-muted)}
+
+.ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:14px;border-radius:16px;background:var(--ph);color:var(--ph-ink)}
+
+.section{padding-block:64px}
+.section.alt{background:var(--surface)}
+.section h2{font-size:clamp(28px,3.4vw,34px);font-weight:700;letter-spacing:-.01em}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px}
+
+.facts{border-bottom:1px solid var(--line)}
+.facts .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;padding-block:28px}
+.fact b{display:block;font-family:var(--display);font-size:36px;font-weight:700;line-height:1.15}
+.fact span{color:var(--muted);font-size:15px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.card{background:var(--surface);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.section.alt .card{background:var(--bg)}
+.card h3{font-size:20px;font-weight:600}
+.card p{color:var(--muted)}
+.meta{font-size:14px;color:var(--muted);font-weight:500}
+
+.topic{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding-block:28px;border-top:1px solid var(--line)}
+.topic:first-of-type{border-top:0}
+.topic h2{font-size:24px;font-weight:600}
+.topic p{max-width:72ch}
+
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.person{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border-radius:16px;padding:24px;min-width:0}
+.avatar{flex:0 0 72px;height:72px;border-radius:999px;background:var(--ph);color:var(--ph-ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:20px}
+.person .who{display:flex;flex-direction:column;gap:6px;min-width:0}
+.person h3{font-size:19px;font-weight:600}
+.person .role{font-size:14px;color:var(--link);font-weight:600}
+.person p{font-size:15px;color:var(--muted)}
+details.bio summary{cursor:pointer;color:var(--link);font-weight:600;font-size:15px;min-height:32px}
+details.bio[open] summary{margin-bottom:6px}
+
+.pi{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.pi .ph{flex:0 0 200px;height:240px}
+.pi > .stack{flex:1 1 480px;min-width:0}
+
+ol.pubs{margin:0;padding-left:1.6em;display:flex;flex-direction:column;gap:14px}
+ol.pubs li{padding-left:4px;max-width:85ch}
+ol.pubs li::marker{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+.me{font-weight:700}
+.pub-title{font-weight:600}
+.key{font-size:15px;color:var(--muted)}
+ul.rlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
+ul.rlist li{max-width:85ch;padding-left:16px;border-left:3px solid var(--line)}
+ul.rlist .finding{color:var(--muted);font-size:15px;margin-top:4px}
+
+.table-box{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px 16px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-weight:600;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.date{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+.split{display:flex;flex-wrap:wrap;gap:20px}
+.split > *{flex:1 1 420px;min-width:0}
+.dark-box{background:var(--band);color:var(--band-ink);border-radius:16px;padding:34px;display:flex;flex-direction:column;gap:14px}
+.dark-box p{color:var(--band-muted)}
+.dark-box .btn{align-self:flex-start}
+.line-box{border:1px solid var(--line);border-radius:16px;padding:34px;display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.line-box .ph{flex:0 0 112px;height:112px;border-radius:999px}
+.line-box .stack{flex:1 1 220px;gap:4px}
+
+.photo{display:block;width:100%;object-fit:cover;border-radius:16px;background:var(--ph)}
+.hero .photo{flex:1 1 380px;min-width:0;height:400px;max-width:100%;object-position:50% 30%}
+.pi > .photo{flex:0 0 220px;width:220px;height:260px;object-position:50% 20%}
+.line-box > .photo{flex:0 0 112px;width:112px;height:112px;border-radius:999px;object-position:50% 25%}
+img.avatar{object-fit:cover;object-position:50% 20%;width:72px}
+figure.fig{margin:8px 0 0;display:flex;flex-direction:column;gap:8px;max-width:620px}
+figure.fig img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff}
+figure.fig figcaption{font-size:14px;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:900px}
+.chapters{display:flex;flex-direction:column;gap:22px;margin:0;padding:0;list-style:none}
+.chapters li{display:flex;gap:18px;align-items:flex-start;max-width:85ch}
+.chapters img{flex:0 0 64px;width:64px;height:auto;border-radius:4px;border:1px solid var(--line)}
+.chapters div{min-width:0}
+ol.pubs li,ul.rlist li,.chapters div{overflow-wrap:anywhere}
+.quote{border-left:3px solid var(--accent);padding-left:20px;font-size:19px;max-width:70ch;color:var(--ink)}
+ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:10px}
+ul.alumni{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px 24px;color:var(--muted)}
+ul.alumni b{color:var(--ink);font-weight:600}
+.logo-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;display:flex;align-items:center;justify-content:center}
+.logo-box img{width:100%;max-width:420px;height:auto}
+ul.team .ini{width:100%;aspect-ratio:1/1;border-radius:14px;background:var(--ph);color:var(--ph-ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:30px;margin-bottom:6px}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--link);border:1px solid var(--link);border-radius:999px;padding:0 8px;white-space:nowrap}
+.src{font-size:14px;color:var(--muted)}
+
+footer{background:var(--band);color:var(--band-muted);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;padding-block:40px}
+footer .col{display:flex;flex-direction:column;gap:4px}
+footer b{font-family:var(--display);font-size:20px;color:var(--band-ink)}
+footer a{color:var(--band-ink)} footer a:hover{color:var(--accent)}
+
+
+
+ul.team{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px}
+ul.team li{display:flex;flex-direction:column;gap:4px;min-width:0}
+ul.team img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 22%;border-radius:14px;background:var(--ph);margin-bottom:6px}
+ul.team b{font-family:var(--display);font-weight:600;font-size:16px}
+ul.team span{font-size:14px;color:var(--muted)}
+.fact a{color:var(--link)}
+.card > a{margin-top:auto;font-weight:600}
+/* Interactive neuron hero */
+.neuron{flex:1 1 420px;min-width:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.neuron-stage{position:relative;width:100%;aspect-ratio:5/4;max-width:100%;border-radius:16px;overflow:hidden;background:radial-gradient(120% 90% at 55% 30%,#16303F 0%,#0B1822 70%);border:1px solid var(--band-line)}
+.neuron-stage canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}
+.neuron-tip{position:absolute;pointer-events:none;background:#F4FBFA;color:#0E1A24;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:8px;max-width:220px;box-shadow:0 4px 14px rgba(0,0,0,.35);transform:translate(-50%,calc(-100% - 12px));opacity:0;transition:opacity .12s}
+.neuron-tip b{display:block;font-family:var(--display);font-size:13px}
+.neuron-hint{position:absolute;left:14px;top:12px;font-size:12px;color:#A9B8C4;letter-spacing:.02em}
+.neuron-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--band-line);border-radius:999px;padding:3px}
+.seg button{font:inherit;font-size:14px;font-weight:600;border:0;border-radius:999px;padding:8px 14px;min-height:40px;background:transparent;color:var(--band-nav);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.btn-tissue{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--band-line);background:transparent;color:var(--band-ink);border-radius:999px;padding:8px 16px;min-height:40px;cursor:pointer}
+.btn-tissue:hover{border-color:var(--band-muted)}
+.neuron-cap{font-size:14px;color:var(--band-muted);min-height:3em;max-width:60ch}
+.neuron-cap a{color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--band-muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:999px}
+
+.seg button[aria-current="step"]{background:var(--accent);color:var(--on-accent)}
+.zbtn{font:inherit;font-size:20px;font-weight:600;line-height:1;width:44px;height:44px;border:1px solid var(--band-line);background:transparent;color:var(--band-ink);border-radius:999px;cursor:pointer}
+.zbtn:disabled{opacity:.35;cursor:default}
+.neuron-hint{transition:opacity .3s;top:10px;left:10px;background:rgba(11,24,34,.78);padding:4px 10px;border-radius:999px;color:#C8D6E0}
+#neuron-seg[hidden],.legend-n[hidden]{display:none}
+.pins{position:absolute;inset:0;pointer-events:none;transition:opacity .25s}
+.pins.off{opacity:0}
+.pins.off .pin{pointer-events:none}
+.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;padding:0;border-radius:999px;pointer-events:auto;cursor:pointer;display:grid;place-items:center;font:700 15px/1 var(--display)}
+.pin::before{content:"";position:absolute;inset:-8px;border-radius:999px}
+.pin.pub{background:#5FD3C3;color:#0E1A24;border:2px solid #E8FFFB;box-shadow:0 0 0 4px rgba(95,211,195,.25)}
+.pin.wip{background:rgba(14,26,36,.8);color:#F2B544;border:2px dashed #F2B544;animation:pinpulse 2.4s ease-in-out infinite}
+.pin[aria-expanded="true"]{outline:3px solid #FFFFFF;outline-offset:2px}
+@keyframes pinpulse{0%,100%{box-shadow:0 0 0 0 rgba(242,181,68,.45)}50%{box-shadow:0 0 0 9px rgba(242,181,68,0)}}
+.zoom-card{position:absolute;left:12px;right:12px;bottom:12px;background:#F4FBFA;color:#0E1A24;border-radius:12px;padding:12px 48px 14px 16px;box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:14px;line-height:1.45;display:flex;flex-direction:column;gap:4px}
+.zoom-card[hidden]{display:none}
+.zoom-card .ztag{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.zoom-card .ztag.pub{color:#0B6E66}.zoom-card .ztag.wip{color:#8A5A00}
+.zoom-card h3{font-size:16px}
+.zoom-card a{color:#0B6E66;font-weight:600}
+.zoom-card .x{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:transparent;font-size:22px;cursor:pointer;color:#0E1A24;border-radius:8px}
+.lg-pub{background:#5FD3C3}
+.lg-wip{border:2px dashed #F2B544}
+.legend-n{display:inline-flex;flex-wrap:wrap;gap:6px 16px}
+@media (max-width:480px){.zbtn{display:none}.seg button{padding:8px 10px}}
+@media (prefers-reduced-motion: reduce){.pin.wip{animation:none}}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#home">de la Peña Lab</a>
+    <nav class="main" aria-label="Main">
+      <a href="#research">Research</a>
+      <a href="#people">People</a>
+      <a href="#publications">Publications</a>
+      <a href="#funding">Funding</a>
+      <a href="#news">News</a>
+      <a href="#resources">circRNA Resources</a>
+      <a href="#rnaclub">NM RNA Club</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" data-view>
+  <div class="band"><div class="wrap">
+    <div class="hero">
+      <div class="text">
+        <p class="eyebrow">Circular RNAs in human pain · UNM School of Medicine</p>
+        <h1>The hidden RNA layer of human pain</h1>
+        <p class="lead">We study circular RNAs (circRNAs), a class of RNA that many standard sequencing methods miss, in human pain-sensing neurons. We mapped the circRNA landscape of human dorsal root ganglia and found that opioid exposure is associated with changes in them. Our goal is to add this hidden layer to the human pain atlas and turn it into new non-addictive treatments.</p>
+        <div class="btns">
+          <a class="btn solid" href="#research">Explore our research</a>
+          <a class="btn ghost" href="#people">Join the lab</a>
+        </div>
+      </div>
+      <figure class="neuron" id="zoom-fig" aria-labelledby="neuron-cap">
+        <div class="neuron-stage" id="neuron-stage">
+          <canvas id="neuron" role="img" aria-label="Animated illustration of a pain-sensing neuron. Signals travel from nerve endings in the skin, past the cell body in the dorsal root ganglion, into the spinal cord. Circular RNAs float in the cell body. Three views show the baseline, published changes after opioid exposure, and questions the lab is working on now."></canvas>
+          <div class="pins" id="zoom-pins"></div>
+          <div class="neuron-tip" id="neuron-tip" aria-hidden="true"></div>
+          <div class="neuron-hint" id="zoom-hint" aria-hidden="true"></div>
+          <div class="zoom-card" id="zoom-card" role="region" aria-live="polite" aria-label="Pin details" hidden>
+            <button type="button" class="x" id="zoom-card-x" aria-label="Close">&times;</button>
+            <span class="ztag"></span>
+            <h3></h3>
+            <p></p>
+            <a href="#"></a>
+          </div>
+        </div>
+        <div class="neuron-ctrl">
+          <div class="seg" id="neuron-modes" role="group" aria-label="What the neuron shows">
+            <button type="button" data-m="base" aria-pressed="true">Baseline</button>
+            <button type="button" data-m="opioid" aria-pressed="false">After opioids</button>
+            <button type="button" data-m="next" aria-pressed="false">Asking next</button>
+          </div>
+          <button type="button" class="btn-tissue" id="btn-tissue" hidden>See it in real tissue</button>
+        </div>
+        <div class="legend" aria-hidden="true">
+          <span><i style="border:2px solid #CFE6FF"></i>circRNA</span><span><i style="background:#F2B544"></i>circNTRK2</span><span><i style="background:#FF7E6B"></i>P2Y11 receptor</span><span><i class="lg-pub"></i>Published finding</span><span><i class="lg-wip"></i>In progress</span>
+        </div>
+        <figcaption class="neuron-cap" id="neuron-cap" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </div></div>
+
+  <div class="facts"><div class="wrap">
+    <div class="fact"><b>43</b><span>circular RNAs changed in opioid-exposed human DRG (<a href="https://pubmed.ncbi.nlm.nih.gov/42152618/"><i>PAIN</i> 2026</a>, Editor's Choice)</span></div>
+    <div class="fact"><b><i>P2RY11</i></b><span>a morphine-induced receptor gene that mice and rats do not have (<a href="https://pubmed.ncbi.nlm.nih.gov/42645192/"><i>Cells</i> 2026</a>)</span></div>
+    <div class="fact"><b>1.5&times;</b><span>New Mexico's opioid overdose death rate compared with the U.S. (24.1 vs 16.0 per 100,000 in 2024, <a href="https://www.kff.org/mental-health/state-indicator/opioid-overdose-death-rates/">KFF</a>)</span></div>
+  </div></div>
+
+  <div class="section"><div class="wrap stack" style="gap:28px">
+    <div class="stack" style="gap:10px">
+      <p class="eyebrow" style="color:var(--link)">Our focus</p>
+      <h2>The circular RNA layer of human pain</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="meta">What they are</span><h3>Loops of RNA</h3><p>Circular RNAs form when a gene's RNA is spliced back onto itself. They are extraordinarily enriched in the mammalian brain and highly enriched in synapses.</p><a href="https://pubmed.ncbi.nlm.nih.gov/25921068/">Rybak-Wolf et al., <i>Mol Cell</i> 2015</a></div>
+      <div class="card"><span class="meta">Why they are missed</span><h3>Invisible to standard methods</h3><p>Human pain atlases were built to read linear RNAs with poly(A) tails, the RNAs that define cell types. CircRNAs lack a poly(A) tail, and in RNA sequencing they are distinguished from linear RNA only by reads spanning the back-splice junction, so these methods largely miss them.</p><a href="https://pubmed.ncbi.nlm.nih.gov/27739534/">Szabo and Salzman, <i>Nat Rev Genet</i> 2016</a></div>
+      <div class="card"><span class="meta">What we found</span><h3>Mapping human DRG</h3><p>Using total RNA sequencing of donor DRG, we characterized the circRNA landscape of human pain-sensing tissue and showed that opioid exposure is associated with lower overall abundance, including reduced circNTRK2.</p><a href="https://pubmed.ncbi.nlm.nih.gov/42152618/">Koch et al., <i>PAIN</i> 2026</a></div>
+    </div>
+    <p class="prose">Our goal is to add the circular RNA layer to the human pain atlas, cell type by cell type, and to test which circRNAs shape pain and the response to opioids. New to circRNAs? Start with our <a href="#resources">circRNA in pain resource</a>.</p>
+  </div></div>
+
+  <div class="section alt"><div class="wrap stack" style="gap:28px">
+    <div class="stack" style="gap:10px">
+      <h2>Why we study human neurons</h2>
+      <p class="prose" style="color:var(--muted)">Many pain treatments that work in rodents have not worked in people. We work with dorsal root ganglia donated through New Mexico Donor Services and with human stem cell-derived neurons, so our findings start where patients are.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="meta">Human-specific biology</span><h3>Some human pain genes are missing in mice</h3><p>Morphine strongly switches on <i>P2RY11</i> in human pain-sensing neurons. Mice and rats lack this gene, so rodent studies cannot detect it.</p><a href="https://pubmed.ncbi.nlm.nih.gov/42645192/">Read the paper</a></div>
+      <div class="card"><span class="meta">Individual differences</span><h3>People's nerve cells respond differently</h3><p>Neurons from different human donors responded differently to gabapentin, a common pain drug, and RNA sequencing of DRG from the more responsive donor pointed to the pathways involved.</p><a href="https://pubmed.ncbi.nlm.nih.gov/40657722/">Read the paper</a></div>
+    </div>
+  </div></div>
+
+  <div class="section"><div class="wrap stack" style="gap:28px">
+    <div class="head-row"><h2>Latest papers</h2><a href="#publications">All publications</a></div>
+    <div class="cards">
+      <article class="card">
+        <span class="meta">PAIN · 2026 · Editor's Choice</span>
+        <h3><a href="https://pubmed.ncbi.nlm.nih.gov/42152618/">Characterization of the circular RNA landscape of human dorsal root ganglia reveals a neurotrophin-related circRNA is modulated by opioid exposure</a></h3>
+        <span class="meta">Koch MR, Demeter JB, Hochrein M, Alles SRA, Westlund KN, Ehsanian R, de la Peña JBI</span>
+      </article>
+      <article class="card">
+        <span class="meta">Cells · 2026</span>
+        <h3><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13511635/">Opioid exposure induces the expression of the purinergic receptor P2RY11 in human nociceptors</a></h3>
+        <span class="meta">Demeter JB, McNally SD, Koch MR, ... de la Peña JBI</span>
+      </article>
+      <article class="card">
+        <span class="meta">Molecular Pain · 2025</span>
+        <h3><a href="https://pubmed.ncbi.nlm.nih.gov/40657722/">Gabapentin's effect on human dorsal root ganglia: Donor-specific electrophysiological and transcriptomic profiles</a></h3>
+        <span class="meta">Demeter JB, Zurek NA, Koch MR, ... de la Peña JBI</span>
+      </article>
+    </div>
+  </div></div>
+
+  <div class="section"><div class="wrap stack" style="gap:24px">
+    <div class="head-row"><h2>Meet the team</h2><a href="#people">All people</a></div>
+    <ul class="team">
+      <li><img src="img/pi.jpg" alt="" width="600" height="528"><b>June Bryan de la Peña</b><span>Principal Investigator</span></li>
+      <li><img src="img/campomayor.jpg" alt="" width="400" height="600"><b>Bon Campomayor</b><span>Postdoctoral Fellow</span></li>
+      <li><img src="img/demeter.jpg" alt="" width="512" height="600"><b>Jenna Demeter</b><span>Research Scientist</span></li>
+      <li><img src="img/koch.jpg" alt="" width="403" height="600"><b>Maddy Koch</b><span>PhD Student</span></li>
+      <li><img src="img/leyrita.jpg" alt="" width="480" height="600"><b>Quisha Leyrita</b><span>Visiting Research Scholar</span></li>
+      <li><img src="img/montoya.jpg" alt="" width="480" height="600"><b>Jeanette Montoya</b><span>Undergraduate</span></li>
+      <li><div class="ini" aria-hidden="true">IE</div><b>Ibrahim Eldenawi</b><span>Undergraduate</span></li>
+      <li><div class="ini" aria-hidden="true">MB</div><b>Manuel Bustillos Lopez</b><span>Undergraduate</span></li>
+      <li><img src="img/madison.jpg" alt="" width="180" height="267" style="object-position:50% 48%"><b>Madison Hochrein</b><span>Medical Student</span></li>
+      <li><img src="img/sean.jpg" alt="" width="180" height="267"><b>Sean McNally</b><span>Medical Student</span></li>
+      <li><div class="ini" aria-hidden="true">GS</div><b>Gracie Swensen</b><span>Medical Student</span></li>
+    </ul>
+  </div></div>
+
+  <div class="section" style="padding-top:0"><div class="wrap stack">
+    <p class="eyebrow" style="color:var(--link)">Research philosophy</p>
+    <p class="quote">Research is the freedom of being able to ask questions, make hypotheses, test them, make mistakes, and solve problems along the way. It is not just about publishing papers or getting grants, which are also important, but having the ability to use creativity, follow clues, and work hard, hoping that one day what we have learned in the lab can positively impact the lives of those who are suffering from chronic conditions such as ongoing pain.</p>
+  </div></div>
+
+  <div class="section"><div class="wrap split">
+    <div class="dark-box">
+      <h2 style="font-size:30px">Join us</h2>
+      <p>We are recruiting graduate students, postdoctoral fellows, and undergraduates interested in RNA biology, human sensory neuroscience, and pain.</p>
+      <a class="btn solid" href="#people">How to apply</a>
+    </div>
+    <div class="line-box">
+      <img class="photo" src="img/pi.jpg" alt="Dr. June Bryan de la Peña in the lab" width="600" height="528">
+      <div class="stack">
+        <h2 style="font-size:22px;font-weight:600">June Bryan I. de la Peña, MS, PhD</h2>
+        <p>Assistant Professor of Research, Department of Anesthesiology &amp; Critical Care Medicine</p>
+        <p>Secondary appointment, Department of Neurosciences</p>
+        <p>University of New Mexico School of Medicine</p>
+        <a href="#people">Full bio</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="src" style="padding-bottom:40px">Supported by the National Institutes of Health (NIH HEAL Initiative through NCATS and NINDS, and NIGMS), UNM Health Sciences Center, the RNA Society, and Anthropic. <a href="#funding">See funding</a></p></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">Research</p>
+    <h1>RNA regulation in human sensory neurons</h1>
+    <p class="lead">We study how RNA regulation in human sensory neurons shapes chronic pain and the response to opioids. Most of what is known about pain biology comes from rodents, and some human pain pathways have no rodent counterpart. Thus, we work directly with human dorsal root ganglia (DRG) from organ donors and human stem cell-derived nociceptors, and we use mouse models to test mechanisms.</p>
+  </div></div>
+  <div class="section" style="padding-top:24px"><div class="wrap">
+    <div class="topic">
+      <h2>Circular RNAs in the human pain axis</h2>
+      <p>Circular RNAs (circRNAs) are stable, covalently closed RNAs that can regulate gene expression. Using high-coverage total RNA sequencing, we mapped the circRNA landscape of human DRG and compared tissue from opioid-exposed donors with age- and sex-matched controls. Opioid exposure was associated with a global reduction in circRNA abundance and with changes in 43 differentially expressed circRNAs. Among these, circNTRK2, derived from the gene encoding the TrkB neurotrophin receptor, was reduced both in opioid-exposed tissue and after repeated morphine exposure in a nociceptor-like cell line (<a href="https://pubmed.ncbi.nlm.nih.gov/42152618/">Koch et al., <i>Pain</i> 2026</a>, Editor's Choice). We are now testing how opioid-responsive circRNAs regulate nociceptor function.</p>
+      <p>Single-cell and spatial atlases of human DRG were designed to capture the linear, polyadenylated RNAs that define cell types, and they now give the field a shared reference. CircRNAs lack a poly(A) tail, and in RNA sequencing they are distinguished from linear RNA only by reads spanning the back-splice junction (<a href="https://pubmed.ncbi.nlm.nih.gov/27739534/">Szabo and Salzman, <i>Nat Rev Genet</i> 2016</a>), so they are not yet part of that reference. Our long-term goal is to add this circular layer to the human pain atlas, using total RNA sequencing, long-read sequencing, and spatial methods that can be registered to existing cell-type maps.</p>
+    </div>
+    <div class="topic">
+      <h2>How opioids reprogram human nociceptors</h2>
+      <p>Using time-series RNA sequencing of human iPSC-derived nociceptors, we found that <i>P2RY11</i>, which encodes the purinergic receptor P2Y11, was the most robustly induced transcript after morphine exposure. P2Y11 is expressed in human DRG neurons, including peripherin- and TRPV1-positive nociceptors, and its immunoreactivity increased after morphine (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13511635/"><i>Cells</i> 2026</a>). Because <i>P2RY11</i> has no mouse or rat ortholog, this pathway cannot be studied in standard mouse or rat models.</p>
+    </div>
+    <div class="topic">
+      <h2>Human DRG pharmacology</h2>
+      <p>We test analgesics directly on human DRG tissue. Our study of gabapentin revealed donor-specific electrophysiological and transcriptomic profiles, which suggests that individual variation in human nociceptors may shape drug response (<a href="https://pubmed.ncbi.nlm.nih.gov/40657722/">Demeter et al., <i>Mol Pain</i> 2025</a>).</p>
+    </div>
+    <div class="topic">
+      <h2>Chemotherapy-induced neuropathy</h2>
+      <p>Oxaliplatin, a common chemotherapy drug, frequently causes peripheral neuropathy, which can be painful and long-lasting, and no treatment is approved to prevent it. Supported by an NIH HEAL Initiative R03, we are testing whether the protein PRR14 shapes how human sensory neurons respond to oxaliplatin, using human DRG tissue and cultured human DRG neurons (<a href="https://reporter.nih.gov/project-details/11216831">NIH RePORTER</a>).</p>
+    </div>
+    <div class="topic">
+      <h2>Human tissue and technology platforms</h2>
+      <p>Dr. de la Peña directs a satellite Human Tissue Repository operated with New Mexico Donor Services, which banks DRG and matched blood from consented organ donors. The lab also applies spatial transcriptomics (10x Genomics Xenium) to map RNA expression in human DRG at single-cell resolution.</p>
+    </div>
+    <div class="topic">
+      <h2>Foundations: translational control in pain</h2>
+      <p>During postdoctoral training, Dr. de la Pe&ntilde;a led or contributed to work showing that RNA control mechanisms in DRG neurons shape pain plasticity. This work showed that inhibiting nonsense-mediated decay induces nociceptive sensitization through the integrated stress response (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10124962/">de la Pe&ntilde;a et al., <i>J Neurosci</i> 2023</a>), that the RNA-binding protein HuR is integral to nociceptor function in mice and humans (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9761683/">Kunder et al., <i>J Neurosci</i> 2022</a>), and that a peptide encoded by an upstream open reading frame promotes pain sensitization (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8119312/">Barragan-Iglesias et al., <i>Pain</i> 2021</a>). It also identified Arc as a regulator of neurogenic inflammation in the skin (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8445061/">de la Pe&ntilde;a et al., <i>J Neurosci</i> 2021</a>) and c-Fos as a downstream target of S6 kinase signaling in inflammatory pain (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9169231/">de la Pe&ntilde;a et al., <i>Br J Pharmacol</i> 2021</a>).</p>
+      <div class="figs">
+        <figure class="fig"><img src="img/fig2019.jpg" alt="Schematic of a pain pathway from inflamed skin through sensory nerve fibers and the dorsal root ganglion to the spinal cord dorsal horn" width="857" height="1200" loading="lazy"><figcaption>RNA control in pain-sensing neurons. From <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7721054/">de la Peña et al., <i>WIREs RNA</i> 2019</a>.</figcaption></figure>
+        <figure class="fig"><img src="img/fig2021.jpg" alt="Translation profiling workflow and volcano plot highlighting Arc as a top translationally regulated gene" width="652" height="1200" loading="lazy"><figcaption>Unbiased translation profiling identifies Arc in nociceptors. From <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8445061/">de la Peña et al., <i>J Neurosci</i> 2021</a>.</figcaption></figure>
+      </div>
+    </div>
+    <div class="topic">
+      <h2>Earlier work</h2>
+      <p>Before pain research, Dr. de la Peña's work in South Korea (1) defined the long-term effects of adolescent cigarette smoke exposure, (2) evaluated the abuse potential of anesthetics and novel psychoactive substances, (3) developed transcriptomic models of ADHD-like phenotypes, and (4) characterized natural products with sedative, anxiolytic, and antidepressant-like effects.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">People</p>
+    <h1>The team</h1>
+    <p class="lead">We are looking for motivated students and researchers who are passionate about neuroscience, molecular biology, and pain research.</p>
+  </div></div>
+
+  <div class="section"><div class="wrap pi">
+    <img class="photo" src="img/pi.jpg" alt="Dr. June Bryan de la Peña in the lab" width="600" height="528">
+    <div class="stack prose">
+      <div class="stack" style="gap:4px">
+        <h2 style="font-size:28px">June Bryan I. de la Peña, MS, PhD</h2>
+        <p class="meta">Principal Investigator</p>
+      </div>
+      <p>Hello, I'm Bryan! My journey began in the humble town of Capoocan, Leyte in the Philippines. I'm a Registered Nurse, holding a Bachelor's degree in Nursing from Western Leyte College of Ormoc City. My fascination with the human body and its intricate workings led me to dedicate my career to helping others. It was during this time that I discovered my passion for research.</p>
+      <p>To further my education and delve into the world of research, I pursued advanced studies at Sahmyook University in Seoul, South Korea. There, I earned both my Master's and PhD degrees in Pharmacology, specializing in Neuropharmacology. Subsequently, I pursued postdoctoral training in molecular biology and functional genomics at the University of Texas at Dallas and later at the University of Wisconsin-Madison.</p>
+      <p>Today, I am an Assistant Professor of Research in the Department of Anesthesiology &amp; Critical Care Medicine, with a secondary appointment in the Department of Neurosciences, at the University of New Mexico School of Medicine, where I founded my lab in September 2023 as part of the Translational Pain Research Group. I also co-founded the New Mexico RNA Club, an RNA Society-accredited RNA Salon, and serve as a DOST Balik Scientist, returning to the Philippines to help build neuroscience research capacity.</p>
+      <p>My research primarily focuses on unraveling the intricate molecular mechanisms underlying chronic pain and its associated disorders, including addiction, depression, and anxiety. My ultimate goal is to develop effective and non-addictive pain therapeutics. I'm deeply passionate about my research because I firmly believe it has the potential to make a significant impact on the lives of millions of individuals who suffer from chronic pain.</p>
+      <div class="stack" style="gap:10px;padding-top:8px">
+        <h3 style="font-size:20px;font-weight:600">Service and leadership</h3>
+        <ul class="plain">
+          <li>Guest Editor (with Dr. Nikesh Kunder), <i>Cells</i> Special Issue <a href="https://www.mdpi.com/journal/cells/special_issues/55167h7jcx">"Mechanisms and Therapies in Chronic Pain"</a>. Submissions are open until November 15, 2026.</li>
+          <li>Co-Chair, MOSAIC Committee, US Association for the Study of Pain (USASP)</li>
+          <li>Member, <a href="https://facgov.unm.edu/senate/rcw/rac/_roster.html">UNM Faculty Senate Research Allocations Committee</a></li>
+          <li>Co-founder and organizer, <a href="#rnaclub">New Mexico RNA Club</a>, an RNA Society-accredited RNA Salon</li>
+          <li>DOST Balik Scientist, Republic of the Philippines (2021, 2022)</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="section alt"><div class="wrap stack" style="gap:28px">
+    <h2>Lab members</h2>
+    <div class="people">
+      <div class="person"><img class="avatar" src="img/campomayor.jpg" alt="Nicole Bon A. Campomayor" width="400" height="600"><div class="who">
+        <h3>Nicole Bon A. Campomayor, MS, PhD</h3><span class="role">Postdoctoral Fellow</span>
+        <p>Bon investigates the neuromolecular mechanisms that drive chronic pain, with the long-term goal of contributing to non-addictive pain therapeutics.</p>
+        <details class="bio"><summary>Full bio</summary><p>Bon grew up in the coastal town of Carigara, Leyte in the Philippines, where an early fascination with marine life and the natural world set the foundation for his research journey. He earned his bachelor's degree in Marine Biology from Visayas State University (ViSCA), focusing on phytoplankton ecology, before pursuing graduate studies abroad. At Sahmyook University in Seoul, South Korea, he completed his MS in Convergence Science specializing in plant cytogenetics. His work included developing microsatellite probes for subgenome discrimination in economically valued crops.</p><p>He later transitioned into neuroscience and completed his PhD in Convergence Science with a focus on neuropharmacology. His doctoral work examined molecular pathways underlying Alzheimer's disease, Parkinson's disease, major depressive disorder, sleep and chronic stress-related dysfunction, aging-associated cognitive decline, and drug addiction using rodent models. His research spans molecular, cellular, and behavioral approaches.</p><p>In the de la Peña Lab within the Department of Anesthesiology &amp; Critical Care Medicine at the University of New Mexico, Bon investigates the neuromolecular mechanisms that drive chronic pain. His long-term goal is to contribute to the development of non-addictive pain therapeutics that can meaningfully improve the lives of individuals living with persistent pain.</p></details>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/demeter.jpg" alt="Jenna Demeter" width="512" height="600"><div class="who">
+        <h3>Jenna Demeter, MS</h3><span class="role">Research Scientist</span>
+        <p>Jenna harnesses the rich information contained within human transcriptomic data and employs complementary wet lab approaches to identify cellular mechanisms and therapeutic targets of various chronic pain conditions.</p>
+        <details class="bio"><summary>Full bio</summary><p>Jenna grew up in Springfield, Ohio, where she began to appreciate the intricacies of disease, including its cellular basis and multifactorial influences. Jenna further developed her fascination with the cellular and molecular underpinnings of physiology and pathophysiology at the University of Tennessee, Knoxville. She pursued a bachelor's in Biochemistry and Cellular and Molecular Biology and contextualized cellular phenomena in a broader social context through a Public Health minor. There Jenna also gained a deeper understanding of metabolic and nutritional influences on physiology and disease while pursuing a master's in Biomedical Nutrition Science. Her undergraduate and graduate research focused on the interplay of transcriptional and metabolic processes on cellular differentiation and metabolic states, specifically in adipose tissues.</p></details>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/koch.jpg" alt="Maddy Koch" width="403" height="600"><div class="who">
+        <h3>Maddy Koch</h3><span class="role">PhD Student</span>
+        <p>Maddy characterizes circular RNAs in the dorsal root ganglia and how opioid exposure changes them. She is first author of the lab's 2026 PAIN Editor's Choice paper on the circRNA landscape of human DRG.</p>
+        <details class="bio"><summary>Full bio</summary><p>Maddy was born and raised in Bradenton, FL and earned a bachelor's in Biology from the University of South Florida. Here, Maddy investigated cryptic genetic diversity in coastal isopod species. Maddy then entered the Biomedical Sciences graduate program in 2021, first working with Dr. Nikolaos Mellios studying circular RNAs (circRNAs) in psychiatric disorders before moving into Dr. de la Peña's lab, where her research focuses on characterizing circRNAs in the dorsal root ganglia and the effects of opioid exposure.</p></details>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/leyrita.jpg" alt="Quisha Jessen Leyrita" width="480" height="600"><div class="who">
+        <h3>Quisha Jessen Leyrita</h3><span class="role">Visiting Research Scholar</span>
+        <p>Quisha is a Registered Chemist and a graduate student at Mindanao State University-Iligan Institute of Technology (MSU-IIT). Her work focuses on drug repurposing.</p>
+        <details class="bio"><summary>Full bio</summary><p>Quisha is a Registered Chemist whose lifelong fascination with chemical interactions has evolved into a dedicated research career. Originally from Butuan City, Philippines, she earned her undergraduate degree in Chemistry from Mindanao State University-Iligan Institute of Technology (MSU-IIT).</p><p>Currently a graduate student at MSU-IIT and a visiting research scholar at the University of New Mexico Health Sciences Center, Quisha's work primarily focuses on drug repurposing, where she leverages her expertise in computational and bioinorganic chemistry to discover new therapeutic potentials for existing compounds.</p></details>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/montoya.jpg" alt="Jeanette Montoya" width="480" height="600"><div class="who">
+        <h3>Jeanette Montoya</h3><span class="role">Undergraduate, Biochemistry</span>
+        <p>Jeanette is an Albuquerque native and a Biochemistry major at UNM working toward medical school.</p>
+        <details class="bio"><summary>Full bio</summary><p>Jeanette is an Albuquerque native through and through, born here, raised here, and fully convinced that nowhere else will ever feel like home. She grew up surrounded by New Mexico sunsets, family, and a whole lot of farming, so staying here for the long run just makes sense to her. She first fell in love with science at Bosque Preparatory School, where hands-on labs and science-heavy coursework hooked her early. Research appeals to her because it's the perfect mix of curiosity, problem-solving, and getting to actually do things, not just read about them. When she's not in class, Jeanette's usually exploring her city, hanging out with the people (and dogs) she loves, or finding new ways to stay connected to the community she plans to be part of forever.</p></details>
+      </div></div>
+
+      <div class="person"><div class="avatar" aria-hidden="true">IE</div><div class="who">
+        <h3>Ibrahim Eldenawi</h3><span class="role">Undergraduate</span>
+      </div></div>
+
+      <div class="person"><div class="avatar" aria-hidden="true">MB</div><div class="who">
+        <h3>Manuel Bustillos Lopez</h3><span class="role">Undergraduate</span>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/madison.jpg" alt="Madison Hochrein" width="180" height="267" style="object-position:50% 48%"><div class="who">
+        <h3>Madison Hochrein</h3><span class="role">Medical Student</span>
+        <p>Madison analyzes demographics and trends in chronic pain patients at UNM Hospital over a ten-year period, bridging research and clinical care.</p>
+        <details class="bio"><summary>Full bio</summary><p>Madison is a native New Mexican, and was born and raised in Albuquerque, New Mexico. She has always had a deep passion for biology and chemistry and a strong desire to help others. She received her bachelor's degree in Biochemistry from the University of New Mexico with a minor in Spanish. During her time as an undergraduate Madison worked for four years in an engineering lab at Sandia National Laboratories where she focused on additive manufacturing and materials science. She also worked as part of the COVID-19 response team at Sandia National Laboratories during the pandemic to aid in COVID-19 testing for the employees and dependents of three National Laboratories.</p><p>In her time as an undergrad, she had a deepened interest in physiology and pharmacology which furthered her interest in medicine and lifelong dream of becoming a physician. She is a medical student at the University of New Mexico School of Medicine, and her research in Dr. de la Pe&ntilde;a's lab focuses on data analysis of demographics and trends in chronic pain patients from UNMH over a ten-year period, with the goal of bridging both the research aspect of chronic pain with the clinical aspect to work towards a solution for chronic pain and addiction.</p></details>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/sean.jpg" alt="Sean McNally" width="180" height="267"><div class="who">
+        <h3>Sean McNally</h3><span class="role">Medical Student</span>
+        <p>Sean studies the genetic and neuroimmune mechanisms driving chronic pain conditions.</p>
+        <details class="bio"><summary>Full bio</summary><p>Sean was born and raised in the rural four corners region of northwestern New Mexico. Growing up in one of the most medically underserved regions in the country, Sean was inspired to pursue medicine watching his father's work within rural and tribal communities. From a young age, he became acutely aware of the deep-rooted healthcare disparities faced by rural populations, fueling a lifelong commitment to studying and addressing health inequities.</p><p>Sean completed his undergraduate education through the Combined BA/MD Program at the University of New Mexico. Studying at the University of New Mexico and the University of Sheffield in the UK, Sean received a B.A. in Health, Medicine, and Human Values with a concentration in Health, Humanities &amp; Society and a minor in Chemistry from the University of New Mexico in 2024. He is a medical student at the University of New Mexico School of Medicine.</p><p>Sean's research interests are shaped by personal and community experiences with chronic pain and neurological illness, particularly among workers in mining, farming, and oil fields who are chronically exposed to neurotoxic substances. In 2023, he joined the Department of Anesthesiology and Critical Care Medicine at UNM as an undergraduate researcher studying the neuroimmune mechanisms underlying chronic neuropathic pain. In 2025, he joined the de la Pe&ntilde;a Lab to continue this work, with a focus on the genetic and neuroimmune mechanisms driving chronic pain conditions.</p></details>
+      </div></div>
+
+      <div class="person"><div class="avatar" aria-hidden="true">GS</div><div class="who">
+        <h3>Gracie Swensen</h3><span class="role">Medical Student</span>
+      </div></div>
+    </div>
+
+    <div class="stack" style="gap:14px;padding-top:12px">
+      <h2 style="font-size:26px">Alumni</h2>
+      <ul class="alumni">
+        <li><b>Ericka Torres</b>, Summer Undergraduate Researcher</li>
+        <li><b>Athena Amindyas</b>, Summer Undergraduate Researcher</li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="section"><div class="wrap split">
+    <div class="dark-box">
+      <h2 style="font-size:28px">Join us in beautiful Albuquerque</h2>
+      <p>If you are interested in a position in this lab, email jdelapena@salud.unm.edu with your latest CV and a note explaining your background, what projects you might be interested in, and why you want to join the lab.</p>
+      <p>We currently welcome applications from graduate students, postdoctoral fellows, and undergraduates. UNM undergraduates can also join through BIOM 410 research credit.</p>
+      <p style="font-size:14px">Equal Opportunity Employer</p>
+    </div>
+    <div class="stack" style="padding:8px 0">
+      <h2 style="font-size:24px">Translational Pain Research Group at UNM</h2>
+      <ul class="plain">
+        <li><a href="https://vivo.health.unm.edu/display/n19374">Dr. Karin Westlund High</a></li>
+        <li><a href="https://hsc.unm.edu/directory/ehsanian-reza.html">Dr. Reza Ehsanian</a></li>
+        <li><a href="https://hsc.unm.edu/medicine/departments/anesthesiology/research/meet-researchers.html">Dr. Mario Danilo Boada</a></li>
+        <li><a href="https://vivo.health.unm.edu/display/n29907">Dr. Tim Petersen</a></li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">Publications</p>
+    <h1>Papers, reviews, and chapters</h1>
+    <p class="lead">Every entry below was checked against PubMed, or against <a href="https://scholar.google.com/citations?user=zfl74V8AAAAJ&amp;hl=en" style="color:var(--accent)">Google Scholar</a> for journals PubMed does not index. Last checked October 2026.</p>
+  </div></div>
+  <div class="section"><div class="wrap stack" style="gap:44px">
+    <p class="key"><b class="me">Bold</b> marks Dr. de la Peña.</p>
+
+    <div class="stack">
+      <h2>Submitted</h2>
+      <ul class="rlist">
+<li><p>Koch MR, Campomayor NBA, <b class="me">de la Peña JBI</b>. <span class="pub-title">Expanding the Human Sensory Atlas to Circular and Long Non-Coding RNAs.</span> Invited Topical Review, submitted to <i>PAIN</i>.</p></li>
+      </ul>
+    </div>
+
+    <div class="stack">
+      <h2>Research articles</h2>
+      <ol class="pubs" reversed>
+<li>Goins AE, Goyal S, Zurek NA, Demeter JB, Propsom K, Gravelle A, Noor S, Koch MR, <b class="me">de la Peña JBI</b>, Lacagnina MJ, Alles SRA. <span class="pub-title">Sex-specific neuroimmune pathophysiological signatures in a mouse model of chronic back pain.</span> <i>J Pain</i>. 2026;50:106427. doi: <a href="https://doi.org/10.1016/j.jpain.2026.106427">10.1016/j.jpain.2026.106427</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/42674133/">42674133</a>.</li>
+<li>Demeter JB, McNally SD, Koch MR, Thiyagarajan S, Montoya JA, Vega L, Abboud P, Alles SRA, Ehsanian R, <b class="me">de la Peña JBI</b>. <span class="pub-title">Opioid Exposure Induces the Expression of the Purinergic Receptor <i>P2RY11</i> in Human Nociceptors.</span> <i>Cells</i>. 2026;15(16):1464. doi: <a href="https://doi.org/10.3390/cells15161464">10.3390/cells15161464</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/42645192/">42645192</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13511635/">PMC13511635</a>.</li>
+<li>Koch MR, Demeter JB, Hochrein M, Alles SRA, Westlund KN, Ehsanian R, <b class="me">de la Peña JBI</b>. <span class="pub-title">Characterization of the circular RNA landscape of human dorsal root ganglia reveals a neurotrophin-related circRNA is modulated by opioid exposure.</span> <i>Pain</i>. 2026;167(7):1615-1630. doi: <a href="https://doi.org/10.1097/j.pain.0000000000003987">10.1097/j.pain.0000000000003987</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/42152618/">42152618</a>. <span class="tag">Editor's Choice</span></li>
+<li>Zurek NA, Shilling MW, Demeter JB, Ehsanian R, Adams IM, Goins AE, Goyal S, Séguéla P, <b class="me">de la Peña JBI</b>, Kunamneni A, Westlund KN, Alles SR. <span class="pub-title">Humanized anti-P2X4 scFv reduces ATP-induced P2X4 currents and modulates excitability in human DRG neurons.</span> <i>Mol Pain</i>. 2025;21:17448069251376200. doi: <a href="https://doi.org/10.1177/17448069251376200">10.1177/17448069251376200</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40856314/">40856314</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12446818/">PMC12446818</a>.</li>
+<li><b class="me">de la Peña JB</b>, García G, Campbell ZT. <span class="pub-title">Ribosome profiling reveals that post-transcriptional control of Nalf1 by heterogeneous nuclear ribonucleoprotein L is required for paclitaxel-induced neuropathic pain.</span> <i>Pain</i>. 2025;166(9):2091-2102. doi: <a href="https://doi.org/10.1097/j.pain.0000000000003577">10.1097/j.pain.0000000000003577</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40839605/">40839605</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12353069/">PMC12353069</a>.</li>
+<li>Demeter JB, Zurek NA, Koch MR, Goins AE, Holguin CO, Shilling MW, Davis MS, Ehsanian R, Alles SR, <b class="me">de la Peña JBI</b>. <span class="pub-title">Gabapentin&#x27;s effect on human dorsal root ganglia: Donor-specific electrophysiological and transcriptomic profiles.</span> <i>Mol Pain</i>. 2025;21:17448069251361712. doi: <a href="https://doi.org/10.1177/17448069251361712">10.1177/17448069251361712</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40657722/">40657722</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12368406/">PMC12368406</a>.</li>
+<li><b class="me">de la Peña JB</b>, Chase R, Kunder N, Smith PR, Lou TF, Stanowick A, Suresh P, Shukla T, Butcher SE, Price TJ, Campbell ZT. <span class="pub-title">Inhibition of Nonsense-Mediated Decay Induces Nociceptive Sensitization through Activation of the Integrated Stress Response.</span> <i>J Neurosci</i>. 2023;43(16):2921-2933. doi: <a href="https://doi.org/10.1523/JNEUROSCI.1604-22.2023">10.1523/JNEUROSCI.1604-22.2023</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36894318/">36894318</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10124962/">PMC10124962</a>.</li>
+<li>Kunder N, <b class="me">de la Peña JB</b>, Lou TF, Chase R, Suresh P, Lawson J, Shukla T, Black B, Campbell ZT. <span class="pub-title">The RNA-Binding Protein HuR Is Integral to the Function of Nociceptors in Mice and Humans.</span> <i>J Neurosci</i>. 2022;42(49):9129-9141. doi: <a href="https://doi.org/10.1523/JNEUROSCI.1630-22.2022">10.1523/JNEUROSCI.1630-22.2022</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36270801/">36270801</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9761683/">PMC9761683</a>.</li>
+<li>Chase R, <b class="me">de la Peña JB</b>, Smith PR, Lawson J, Lou TF, Stanowick AD, Black BJ, Campbell ZT. <span class="pub-title">Global analyses of mRNA expression in human sensory neurons reveal eIF5A as a conserved target for inflammatory pain.</span> <i>FASEB J</i>. 2022;36(7):e22422. doi: <a href="https://doi.org/10.1096/fj.202101933RR">10.1096/fj.202101933RR</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35747924/">35747924</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10227861/">PMC10227861</a>.</li>
+<li><b class="me">de la Peña JB</b>, Kunder N, Lou TF, Chase R, Stanowick A, Barragan-Iglesias P, Pancrazio JJ, Campbell ZT. <span class="pub-title">A role for translational regulation by S6 kinase and a downstream target in inflammatory pain.</span> <i>Br J Pharmacol</i>. 2021;178(23):4675-4690. doi: <a href="https://doi.org/10.1111/bph.15646">10.1111/bph.15646</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34355805/">34355805</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9169231/">PMC9169231</a>.</li>
+<li><b class="me">de la Peña JB</b>, Barragan-Iglesias P, Lou TF, Kunder N, Loerch S, Shukla T, Basavarajappa L, Song J, James DN, Megat S, Moy JK, Wanghzou A, Ray PR, Hoyt K, Steward O, Price TJ, Shepherd J, Campbell ZT. <span class="pub-title">Intercellular Arc Signaling Regulates Vasodilation.</span> <i>J Neurosci</i>. 2021;41(37):7712-7726. doi: <a href="https://doi.org/10.1523/JNEUROSCI.0440-21.2021">10.1523/JNEUROSCI.0440-21.2021</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34326146/">34326146</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8445061/">PMC8445061</a>.</li>
+<li>Botanas CJ, Perez Custodio RJ, Kim HJ, <b class="me">de la Peña JB</b>, Sayson LV, Ortiz DM, Kim M, Lee HJ, Acharya S, Kim KM, Lee CJ, Ryu JH, Lee YS, Cheong JH. <span class="pub-title">R (-)-methoxetamine exerts rapid and sustained antidepressant effects and fewer behavioral side effects relative to S (+)-methoxetamine.</span> <i>Neuropharmacology</i>. 2021;193:108619. doi: <a href="https://doi.org/10.1016/j.neuropharm.2021.108619">10.1016/j.neuropharm.2021.108619</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34023336/">34023336</a>.</li>
+<li>Barragan-Iglesias P, Kunder N, Wanghzou A, Black B, Ray PR, Lou TF, <b class="me">de la Peña JB</b>, Atmaramani R, Shukla T, Pancrazio JJ, Price TJ, Campbell ZT. <span class="pub-title">A peptide encoded within a 5&#x27; untranslated region promotes pain sensitization in mice.</span> <i>Pain</i>. 2021;162(6):1864-1875. doi: <a href="https://doi.org/10.1097/j.pain.0000000000002191">10.1097/j.pain.0000000000002191</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/33449506/">33449506</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8119312/">PMC8119312</a>.</li>
+<li>Shukla T, <b class="me">de la Peña JB</b>, Perish JM, Ploski JE, Stumpf CR, Webster KR, Thorn CA, Campbell ZT. <span class="pub-title">A Highly Selective MNK Inhibitor Rescues Deficits Associated with Fragile X Syndrome in Mice.</span> <i>Neurotherapeutics</i>. 2021;18(1):624-639. doi: <a href="https://doi.org/10.1007/s13311-020-00932-4">10.1007/s13311-020-00932-4</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/33006091/">33006091</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8116363/">PMC8116363</a>.</li>
+<li>Atmaramani RR, Black BJ, <b class="me">de la Peña JB</b>, Campbell ZT, Pancrazio JJ. <span class="pub-title">Conserved Expression of Nav1.7 and Nav1.8 Contribute to the Spontaneous and Thermally Evoked Excitability in IL-6 and NGF-Sensitized Adult Dorsal Root Ganglion Neurons In Vitro.</span> <i>Bioengineering (Basel)</i>. 2020;7(2):44. doi: <a href="https://doi.org/10.3390/bioengineering7020044">10.3390/bioengineering7020044</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/32429423/">32429423</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7356605/">PMC7356605</a>.</li>
+<li>Dela Peña IJI, Botanas CJ, <b class="me">de la Peña JB</b>, Custodio RJ, Dela Peña I, Ryoo ZY, Kim BN, Ryu JH, Kim HJ, Cheong JH. <span class="pub-title">The Atxn7-overexpressing mice showed hyperactivity and impulsivity which were ameliorated by atomoxetine treatment: A possible animal model of the hyperactive-impulsive phenotype of ADHD.</span> <i>Prog Neuropsychopharmacol Biol Psychiatry</i>. 2019;88:311-319. doi: <a href="https://doi.org/10.1016/j.pnpbp.2018.08.012">10.1016/j.pnpbp.2018.08.012</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30125623/">30125623</a>.</li>
+<li>Kim M, Custodio RJ, Botanas CJ, <b class="me">de la Peña JB</b>, Sayson LV, Abiero A, Ryoo ZY, Cheong JH, Kim HJ. <span class="pub-title">The circadian gene, Per2, influences methamphetamine sensitization and reward through the dopaminergic system in the striatum of mice.</span> <i>Addict Biol</i>. 2019;24(5):946-957. doi: <a href="https://doi.org/10.1111/adb.12663">10.1111/adb.12663</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30091820/">30091820</a>.</li>
+<li>Abiero A, Botanas CJ, Sayson LV, Custodio RJ, <b class="me">de la Peña JB</b>, Kim M, Lee HJ, Seo JW, Ryu IS, Chang CM, Yang JS, Lee YS, Jang CG, Kim HJ, Cheong JH. <span class="pub-title">5-Methoxy-α-methyltryptamine (5-MeO-AMT), a tryptamine derivative, induces head-twitch responses in mice through the activation of serotonin receptor 2a in the prefrontal cortex.</span> <i>Behav Brain Res</i>. 2019;359:828-835. doi: <a href="https://doi.org/10.1016/j.bbr.2018.07.020">10.1016/j.bbr.2018.07.020</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30053461/">30053461</a>.</li>
+<li>Custodio RJP, Botanas CJ, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Sayson LV, Abiero A, Ryoo ZY, Kim BN, Kim HJ, Cheong JH. <span class="pub-title">Overexpression of the Thyroid Hormone-Responsive (THRSP) Gene in the Striatum Leads to the Development of Inattentive-like Phenotype in Mice.</span> <i>Neuroscience</i>. 2018;390:141-150. doi: <a href="https://doi.org/10.1016/j.neuroscience.2018.08.008">10.1016/j.neuroscience.2018.08.008</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30138648/">30138648</a>.</li>
+<li>Botanas CJ, Yoon SS, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Custodio RJ, Woo T, Seo JW, Jang CG, Yang JS, Yoon YM, Lee YS, Kim HJ, Cheong JH. <span class="pub-title">A new synthetic drug 5-(2-aminopropyl)indole (5-IT) induces rewarding effects and increases dopamine D1 receptor and dopamine transporter mRNA levels.</span> <i>Behav Brain Res</i>. 2018;341:122-128. doi: <a href="https://doi.org/10.1016/j.bbr.2017.12.026">10.1016/j.bbr.2017.12.026</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29288746/">29288746</a>.</li>
+<li>Custodio RJP, Botanas CJ, Yoon SS, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Woo T, Seo JW, Jang CG, Kwon YH, Kim NY, Lee YS, Kim HJ, Cheong JH. <span class="pub-title">Evaluation of the Abuse Potential of Novel Amphetamine Derivatives with Modifications on the Amine (NBNA) and Phenyl (EDA, PMEA, 2-APN) Sites.</span> <i>Biomol Ther (Seoul)</i>. 2017;25(6):578-585. doi: <a href="https://doi.org/10.4062/biomolther.2017.141">10.4062/biomolther.2017.141</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29081089/">29081089</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5685426/">PMC5685426</a>.</li>
+<li>Botanas CJ, <b class="me">de la Peña JB</b>, Custodio RJ, Dela Peña IJ, Kim M, Woo T, Kim HJ, Kim HI, Chang Cho M, Lee YS, Cheong JH. <span class="pub-title">Methoxetamine produces rapid and sustained antidepressant effects probably via glutamatergic and serotonergic mechanisms.</span> <i>Neuropharmacology</i>. 2017;126:121-127. doi: <a href="https://doi.org/10.1016/j.neuropharm.2017.08.038">10.1016/j.neuropharm.2017.08.038</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28867363/">28867363</a>.</li>
+<li>Dela Peña I, Dela Peña IJ, <b class="me">de la Peña JB</b>, Kim HJ, Shin CY, Han DH, Kim BN, Ryu JH, Cheong JH. <span class="pub-title">Methylphenidate and Atomoxetine-Responsive Prefrontal Cortical Genetic Overlaps in &quot;Impulsive&quot; SHR/NCrl and Wistar Rats.</span> <i>Behav Genet</i>. 2017;47(5):564-580. doi: <a href="https://doi.org/10.1007/s10519-017-9861-3">10.1007/s10519-017-9861-3</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28744604/">28744604</a>.</li>
+<li>Dela Peña IJI, Dela Peña I, <b class="me">de la Peña JB</b>, Kim HJ, Sohn A, Shin CY, Han DH, Kim BN, Ryu JH, Cheong JH. <span class="pub-title">Transcriptional profiling of SHR/NCrl prefrontal cortex shows hyperactivity-associated genes responsive to amphetamine challenge.</span> <i>Genes Brain Behav</i>. 2017;16(7):664-674. doi: <a href="https://doi.org/10.1111/gbb.12388">10.1111/gbb.12388</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28422445/">28422445</a>.</li>
+<li>Dela Peña IJI, Kim HJ, Botanas CJ, <b class="me">de la Peña JB</b>, Van Le TH, Nguyen MD, Park JH, Cheong JH. <span class="pub-title">The psychopharmacological activities of Vietnamese ginseng in mice: characterization of its psychomotor, sedative-hypnotic, antistress, anxiolytic, and cognitive effects.</span> <i>J Ginseng Res</i>. 2017;41(2):201-208. doi: <a href="https://doi.org/10.1016/j.jgr.2016.03.005">10.1016/j.jgr.2016.03.005</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28413325/">28413325</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5386119/">PMC5386119</a>.</li>
+<li>Botanas CJ, Yoon SS, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Woo T, Seo JW, Jang CG, Park KT, Lee YH, Lee YS, Kim HJ, Cheong JH. <span class="pub-title">The Abuse Potential of α-Piperidinopropiophenone (PIPP) and α-Piperidinopentiothiophenone (PIVT), Two New Synthetic Cathinones with Piperidine Ring Substituent.</span> <i>Biomol Ther (Seoul)</i>. 2017;25(2):122-129. doi: <a href="https://doi.org/10.4062/biomolther.2016.241">10.4062/biomolther.2016.241</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28173643/">28173643</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5340536/">PMC5340536</a>.</li>
+<li>Botanas CJ, Yoon SS, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Woo T, Seo JW, Jang CG, Park KT, Lee YH, Lee YS, Kim HJ, Cheong JH. <span class="pub-title">The abuse potential of two novel synthetic cathinones with modification on the alpha-carbon position, 2-cyclohexyl-2-(methylamino)-1-phenylethanone (MACHP) and 2-(methylamino)-1-phenyloctan-1-one (MAOP), and their effects on dopaminergic activity.</span> <i>Pharmacol Biochem Behav</i>. 2017;153:160-167. doi: <a href="https://doi.org/10.1016/j.pbb.2016.12.017">10.1016/j.pbb.2016.12.017</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28063946/">28063946</a>.</li>
+<li>Botanas CJ, Yoon SS, <b class="me">de la Peña JB</b>, Dela Peña IJ, Kim M, Woo T, Seo JW, Jang CG, Park KT, Lee YH, Lee YS, Kim HJ, Cheong JH. <span class="pub-title">A novel synthetic cathinone, 2-(methylamino)-1-(naphthalen-2-yl) propan-1-one (BMAPN), produced rewarding effects and altered striatal dopamine-related gene expression in mice.</span> <i>Behav Brain Res</i>. 2017;317:494-501. doi: <a href="https://doi.org/10.1016/j.bbr.2016.10.016">10.1016/j.bbr.2016.10.016</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27737791/">27737791</a>.</li>
+<li><span>Kim M, Kim HJ, Kim SM, <b class="me">de la Peña JB</b>, dela Peña IJ, Botanas CJ, Woo T, et al.</span> <span class="pub-title">Protection against electroshock- and pentylenetetrazol-induced seizures by the water extract of Rehmannia glutinous can be mediated through GABA receptor-chloride channel complexes.</span> <i>Nat Prod Sci</i>. 2017;23(1):40-45.</li>
+<li><b class="me">de la Peña JB</b>, Ahsan HM, Botanas CJ, Dela Peña IJ, Woo T, Kim HJ, Cheong JH. <span class="pub-title">Cigarette smoke exposure during adolescence but not adulthood induces anxiety-like behavior and locomotor stimulation in rats during withdrawal.</span> <i>Int J Dev Neurosci</i>. 2016;55:49-55. doi: <a href="https://doi.org/10.1016/j.ijdevneu.2016.09.007">10.1016/j.ijdevneu.2016.09.007</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27647343/">27647343</a>.</li>
+<li>Dela Peña IJI, Kim HJ, <b class="me">de la Peña JB</b>, Kim M, Botanas CJ, You KY, Woo T, Lee YS, Jung JC, Kim KM, Cheong JH. <span class="pub-title">A tryptic hydrolysate from bovine milk αs1-casein enhances pentobarbital-induced sleep in mice via the GABAA receptor.</span> <i>Behav Brain Res</i>. 2016;313:184-190. doi: <a href="https://doi.org/10.1016/j.bbr.2016.07.013">10.1016/j.bbr.2016.07.013</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27401107/">27401107</a>.</li>
+<li>Botanas CJ, Lee H, <b class="me">de la Peña JB</b>, Dela Peña IJ, Woo T, Kim HJ, Han DH, Kim BN, Cheong JH. <span class="pub-title">Rearing in an enriched environment attenuated hyperactivity and inattention in the Spontaneously Hypertensive Rats, an animal model of Attention-Deficit Hyperactivity Disorder.</span> <i>Physiol Behav</i>. 2016;155:30-7. doi: <a href="https://doi.org/10.1016/j.physbeh.2015.11.035">10.1016/j.physbeh.2015.11.035</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26656767/">26656767</a>.</li>
+<li>Tampus R, Yoon SS, <b class="me">de la Peña JB</b>, Botanas CJ, Kim HJ, Seo JW, Jeong EJ, Jang CG, Cheong JH. <span class="pub-title">Assessment of the Abuse Liability of Synthetic Cannabinoid Agonists JWH-030, JWH-175, and JWH-176.</span> <i>Biomol Ther (Seoul)</i>. 2015;23(6):590-6. doi: <a href="https://doi.org/10.4062/biomolther.2015.120">10.4062/biomolther.2015.120</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26535085/">26535085</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4624076/">PMC4624076</a>.</li>
+<li>dela Peña IJ, Hong E, <b class="me">de la Peña JB</b>, Kim HJ, Botanas CJ, Hong YS, Hwang YS, Moon BS, Cheong JH. <span class="pub-title">Milk Collected at Night Induces Sedative and Anxiolytic-Like Effects and Augments Pentobarbital-Induced Sleeping Behavior in Mice.</span> <i>J Med Food</i>. 2015;18(11):1255-61. doi: <a href="https://doi.org/10.1089/jmf.2015.3448">10.1089/jmf.2015.3448</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26501383/">26501383</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4638207/">PMC4638207</a>.</li>
+<li>Botanas CJ, <b class="me">de la Peña JB</b>, Dela Pena IJ, Tampus R, Kim HJ, Yoon SS, Seo JW, Jeong EJ, Cheong JH. <span class="pub-title">Evaluation of the abuse potential of AM281, a new synthetic cannabinoid CB1 receptor antagonist.</span> <i>Eur J Pharmacol</i>. 2015;766:135-41. doi: <a href="https://doi.org/10.1016/j.ejphar.2015.10.004">10.1016/j.ejphar.2015.10.004</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26450088/">26450088</a>.</li>
+<li>dela Peña IJ, Hong E, Kim HJ, <b class="me">de la Peña JB</b>, Woo TS, Lee YS, Cheong JH. <span class="pub-title">Artemisia capillaris Thunberg Produces Sedative-Hypnotic Effects in Mice, Which are Probably Mediated Through Potentiation of the GABAA Receptor.</span> <i>Am J Chin Med</i>. 2015;43(4):667-79. doi: <a href="https://doi.org/10.1142/S0192415X1550041X">10.1142/S0192415X1550041X</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26119953/">26119953</a>.</li>
+<li><b class="me">de la Peña JB</b>, Ahsan HM, Tampus R, Botanas CJ, dela Peña IJ, Kim HJ, Sohn A, dela Peña I, Shin CY, Ryu JH, Cheong JH. <span class="pub-title">Cigarette smoke exposure during adolescence enhances sensitivity to the rewarding effects of nicotine in adulthood, even after a long period of abstinence.</span> <i>Neuropharmacology</i>. 2015;99:9-14. doi: <a href="https://doi.org/10.1016/j.neuropharm.2015.06.014">10.1016/j.neuropharm.2015.06.014</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26116818/">26116818</a>.</li>
+<li>Dela Peña I, Bang M, Lee J, <b class="me">de la Peña JB</b>, Kim BN, Han DH, Noh M, Shin CY, Cheong JH. <span class="pub-title">Common prefrontal cortical gene expression profiles between adolescent SHR/NCrl and WKY/NCrl rats which showed inattention behavior.</span> <i>Behav Brain Res</i>. 2015;291:268-276. doi: <a href="https://doi.org/10.1016/j.bbr.2015.05.012">10.1016/j.bbr.2015.05.012</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/26048425/">26048425</a>.</li>
+<li>Botanas CJ, <b class="me">de la Peña JB</b>, Dela Peña IJ, Tampus R, Yoon R, Kim HJ, Lee YS, Jang CG, Cheong JH. <span class="pub-title">Methoxetamine, a ketamine derivative, produced conditioned place preference and was self-administered by rats: Evidence of its abuse potential.</span> <i>Pharmacol Biochem Behav</i>. 2015;133:31-6. doi: <a href="https://doi.org/10.1016/j.pbb.2015.03.007">10.1016/j.pbb.2015.03.007</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/25792291/">25792291</a>.</li>
+<li>dela Peña I, Gonzales EL, <b class="me">de la Peña JB</b>, Kim BN, Han DH, Shin CY, Cheong JH. <span class="pub-title">Individual differences in novelty-seeking behavior in spontaneously hypertensive rats: Enhanced sensitivity to the reinforcing effect of methylphenidate in the high novelty-preferring subpopulation.</span> <i>J Neurosci Methods</i>. 2015;252:48-54. doi: <a href="https://doi.org/10.1016/j.jneumeth.2014.08.019">10.1016/j.jneumeth.2014.08.019</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/25169048/">25169048</a>.</li>
+<li>dela Peña I, <b class="me">de la Peña JB</b>, Kim BN, Han DH, Noh M, Cheong JH. <span class="pub-title">Gene expression profiling in the striatum of amphetamine-treated spontaneously hypertensive rats which showed amphetamine conditioned place preference and self-administration.</span> <i>Arch Pharm Res</i>. 2015;38(5):865-75. doi: <a href="https://doi.org/10.1007/s12272-014-0470-x">10.1007/s12272-014-0470-x</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/25163681/">25163681</a>.</li>
+<li>Ahsan HM, <b class="me">de la Peña JB</b>, Botanas CJ, Kim HJ, Yu GY, Cheong JH. <span class="pub-title">Conditioned place preference and self-administration induced by nicotine in adolescent and adult rats.</span> <i>Biomol Ther (Seoul)</i>. 2014;22(5):460-6. doi: <a href="https://doi.org/10.4062/biomolther.2014.056">10.4062/biomolther.2014.056</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/25414778/">25414778</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4201227/">PMC4201227</a>.</li>
+<li><b class="me">de la Peña JB</b>, Ahsan HM, Botanas CJ, Sohn A, Yu GY, Cheong JH. <span class="pub-title">Adolescent nicotine or cigarette smoke exposure changes subsequent response to nicotine conditioned place preference and self-administration.</span> <i>Behav Brain Res</i>. 2014;272:156-64. doi: <a href="https://doi.org/10.1016/j.bbr.2014.06.044">10.1016/j.bbr.2014.06.044</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/24991754/">24991754</a>.</li>
+<li><b class="me">de la Peña JB</b>, Ahsan HM, Dela Peña IJ, Park HB, Kim HJ, Sohn A, Kim YT, Cheong JH. <span class="pub-title">Propofol pretreatment induced place preference and self-administration of the tiletamine-zolazepam combination: implication on drug of abuse substitution.</span> <i>Am J Drug Alcohol Abuse</i>. 2014;40(4):321-6. doi: <a href="https://doi.org/10.3109/00952990.2014.920850">10.3109/00952990.2014.920850</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/24950106/">24950106</a>.</li>
+<li>Dela Peña IJ, Yoon SY, <b class="me">de la Peña JB</b>, Park S, Yoon B, Kim HJ, Paek SH, Seo YK, Moon BS, Cheong JH. <span class="pub-title">The ameliorating effect of Rosa roxburghii against ethanol-induced psychomotor alterations in rats.</span> <i>Am J Drug Alcohol Abuse</i>. 2014;40(1):75-81. doi: <a href="https://doi.org/10.3109/00952990.2013.846349">10.3109/00952990.2013.846349</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/24266614/">24266614</a>.</li>
+<li><b class="me">de la Peña JB</b>, Kim CA, Lee HL, Yoon SY, Kim HJ, Hong EY, Kim GH, Ryu JH, Lee YS, Kim KM, Cheong JH. <span class="pub-title">Luteolin mediates the antidepressant-like effects of Cirsium japonicum in mice, possibly through modulation of the GABAA receptor.</span> <i>Arch Pharm Res</i>. 2014;37(2):263-9. doi: <a href="https://doi.org/10.1007/s12272-013-0229-9">10.1007/s12272-013-0229-9</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23925560/">23925560</a>.</li>
+<li><span>dela Peña IJ, <b class="me">de la Peña JB</b>, Yoon SY, Kim HJ, Lee JH, Paek SH, Seo YK, et al.</span> <span class="pub-title">Supplementation of Laurus nobilis attenuate ethanol-induced psychomotor alterations in rats.</span> <i>Nat Prod Sci</i>. 2014;20(1):44-50.</li>
+<li><span><b class="me">de la Peña JB</b>, Cheong JH.</span> <span class="pub-title">The ameliorating effect of Hoveniae Semen seu Fructus extract against ethanol-induced psychomotor alterations in rats.</span> <i>Yakhak Hoeji</i>. 2014;58(5):300-306.</li>
+<li><b class="me">de la Peña JB</b>, dela Peña IJ, Lee HL, dela Peña I, Shin CY, Sohn AR, Cheong JH. <span class="pub-title">Pre-exposure to ethanol, but not to caffeine and nicotine, induced place preference and self-administration of the NMDA receptor antagonist-benzodiazepine combination, Zoletil®.</span> <i>Pharmacol Biochem Behav</i>. 2013;110:231-7. doi: <a href="https://doi.org/10.1016/j.pbb.2013.07.016">10.1016/j.pbb.2013.07.016</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23916424/">23916424</a>.</li>
+<li>Liu X, Hong SI, Park SJ, <b class="me">de la Peña JB</b>, Che H, Yoon SY, Kim DH, Kim JM, Cai M, Risbrough V, Geyer MA, Shin CY, Cheong JH, Park H, Lew JH, Ryu JH. <span class="pub-title">The ameliorating effects of 5,7-dihydroxy-6-methoxy-2(4-phenoxyphenyl)-4H-chromene-4-one, an oroxylin A derivative, against memory impairment and sensorimotor gating deficit in mice.</span> <i>Arch Pharm Res</i>. 2013;36(7):854-63. doi: <a href="https://doi.org/10.1007/s12272-013-0106-6">10.1007/s12272-013-0106-6</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23543630/">23543630</a>.</li>
+<li>Dela Peña IJ, Lee HL, Yoon SY, <b class="me">de la Peña JB</b>, Kim HK, Hong EY, Cheong JH. <span class="pub-title">The ethanol extract of Cirsium japonicum increased chloride ion influx through stimulating GABA(A) receptor in human neuroblastoma cells and exhibited anxiolytic-like effects in mice.</span> <i>Drug Discov Ther</i>. 2013;7(1):18-23. doi: <a href="https://doi.org/10.5582/ddt.2013.v7.1.18">10.5582/ddt.2013.v7.1.18</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23524939/">23524939</a>.</li>
+<li><b class="me">de la Peña JB</b>, Lee HL, Yoon SY, Kim GH, Lee YS, Cheong JH. <span class="pub-title">The involvement of magnoflorine in the sedative and anxiolytic effects of Sinomeni Caulis et Rhizoma in mice.</span> <i>J Nat Med</i>. 2013;67(4):814-21. doi: <a href="https://doi.org/10.1007/s11418-013-0754-3">10.1007/s11418-013-0754-3</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23456265/">23456265</a>.</li>
+<li><b class="me">de la Peña JB</b>, Yoon SY, de la Peña IC, Lee HL, I de la Peña IJ, Cheong JH. <span class="pub-title">Pre-exposure to related substances induced place preference and self-administration of the NMDA receptor antagonist-benzodiazepine combination, zoletil.</span> <i>Behav Pharmacol</i>. 2013;24(1):20-8. doi: <a href="https://doi.org/10.1097/FBP.0b013e32835cf442">10.1097/FBP.0b013e32835cf442</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/23238086/">23238086</a>.</li>
+<li><b class="me">de la Peña JB</b>, Lee HC, de la Peña IC, Woo TS, Yoon SY, Lee HL, Han JS, Lee JI, Cho YJ, Shin CY, Cheong JH. <span class="pub-title">Rewarding and reinforcing effects of the NMDA receptor antagonist-benzodiazepine combination, Zoletil®: difference between acute and repeated exposure.</span> <i>Behav Brain Res</i>. 2012;233(2):434-42. doi: <a href="https://doi.org/10.1016/j.bbr.2012.05.038">10.1016/j.bbr.2012.05.038</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/22659394/">22659394</a>.</li>
+<li>dela Peña I, Yoon SY, Lee JC, <b class="me">de la Peña JB</b>, Sohn AR, Ryu JH, Shin CY, Cheong JH. <span class="pub-title">Methylphenidate treatment in the spontaneously hypertensive rat: influence on methylphenidate self-administration and reinstatement in comparison with Wistar rats.</span> <i>Psychopharmacology (Berl)</i>. 2012;221(2):217-26. doi: <a href="https://doi.org/10.1007/s00213-011-2564-1">10.1007/s00213-011-2564-1</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/22086360/">22086360</a>.</li>
+      </ol>
+    </div>
+
+    <div class="stack">
+      <h2>Review articles</h2>
+      <ol class="pubs" reversed>
+<li><b class="me">de la Peña JBI</b>, Song JJ, Campbell ZT. <span class="pub-title">RNA control in pain: Blame it on the messenger.</span> <i>Wiley Interdiscip Rev RNA</i>. 2019;10(6):e1546. doi: <a href="https://doi.org/10.1002/wrna.1546">10.1002/wrna.1546</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31090211/">31090211</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7721054/">PMC7721054</a>.</li>
+<li>Botanas CJ, <b class="me">de la Peña JB</b>, Kim HJ, Lee YS, Cheong JH. <span class="pub-title">Methoxetamine: A foe or friend?</span> <i>Neurochem Int</i>. 2019;122:1-7. doi: <a href="https://doi.org/10.1016/j.neuint.2018.10.020">10.1016/j.neuint.2018.10.020</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30365979/">30365979</a>.</li>
+<li><b class="me">de la Peña JB</b>, Campbell ZT. <span class="pub-title">RNA-binding proteins as targets for pain therapeutics.</span> <i>Neurobiol Pain</i>. 2018;4:2-7. doi: <a href="https://doi.org/10.1016/j.ynpai.2018.01.003">10.1016/j.ynpai.2018.01.003</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30370343/">30370343</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6201239/">PMC6201239</a>.</li>
+<li>Kim M, <b class="me">de la Peña JB</b>, Cheong JH, Kim HJ. <span class="pub-title">Neurobiological Functions of the Period Circadian Clock 2 Gene, <i>Per2</i>.</span> <i>Biomol Ther (Seoul)</i>. 2018;26(4):358-367. doi: <a href="https://doi.org/10.4062/biomolther.2017.131">10.4062/biomolther.2017.131</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29223143/">29223143</a>. PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6029676/">PMC6029676</a>.</li>
+<li><b class="me">de la Peña JB</b>, Dela Peña IJ, Custodio RJ, Botanas CJ, Kim HJ, Cheong JH. <span class="pub-title">Exploring the Validity of Proposed Transgenic Animal Models of Attention-Deficit Hyperactivity Disorder (ADHD).</span> <i>Mol Neurobiol</i>. 2018;55(5):3739-3754. doi: <a href="https://doi.org/10.1007/s12035-017-0608-1">10.1007/s12035-017-0608-1</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28534274/">28534274</a>.</li>
+<li><b class="me">de la Peña JB</b>, Cheong JH. <span class="pub-title">The abuse liability of the NMDA receptor antagonist-benzodiazepine (tiletamine-zolazepam) combination: evidence from clinical case reports and preclinical studies.</span> <i>Drug Test Anal</i>. 2016;8(8):760-7. doi: <a href="https://doi.org/10.1002/dta.1987">10.1002/dta.1987</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27341080/">27341080</a>.</li>
+      </ol>
+    </div>
+
+    <div class="stack">
+      <h2>Book chapters</h2>
+      <ul class="chapters">
+<li><img src="img/cover_mmb.jpg" alt="Cover of RNA Analysis, Methods in Molecular Biology volume 2962" width="64" loading="lazy"><div>Koch MR, Demeter JB, Chase R, Kunder NP, Lou TF, Shukla TN, <b class="me">de la Peña JBI</b>. <span class="pub-title">Inhibition of Nonsense-Mediated Decay in Dorsal Root Ganglion Neurons.</span> In: Delpy L, ed. <i>RNA Analysis. Methods in Molecular Biology</i>. 2025;2962:217-235. doi: <a href="https://doi.org/10.1007/978-1-0716-4726-4_15">10.1007/978-1-0716-4726-4_15</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40699432/">40699432</a>.</div></li>
+<li><img src="img/cover_oxford.jpg" alt="Cover of The Oxford Handbook of Neuronal Protein Synthesis" width="64" loading="lazy"><div>Loerch S, <b class="me">de la Peña JB</b>, Song J, Pancrazio JJ, Price TJ, Campbell ZT. <span class="pub-title">Translational controls in pain.</span> In: Sossin WS, ed. <i>The Oxford Handbook of Neuronal Protein Synthesis</i>. Oxford University Press; 2018. doi: <a href="https://doi.org/10.1093/oxfordhb/9780190686307.001.0001">10.1093/oxfordhb/9780190686307.001.0001</a>.</div></li>
+<li><img src="img/cover_adhd.jpg" alt="Cover of ADHD: New Directions in Diagnosis and Treatment" width="64" loading="lazy"><div><b class="me">de la Peña JB</b>, Botanas CJ, Tampus R, dela Peña IJ, Kim HJ, dela Peña I, Cheong JH. <span class="pub-title">Updates on the use of natural treatments for attention-deficit hyperactivity disorder (ADHD).</span> In: Norvilitis JM, ed. <i>ADHD: New Directions in Diagnosis and Treatment</i>. InTechOpen; 2015:351. doi: <a href="https://doi.org/10.5772/60840">10.5772/60840</a>.</div></li>
+      </ul>
+    </div>
+
+    <div class="stack">
+      <h2>Conference proceedings</h2>
+      <ol class="pubs" reversed>
+<li>Dolui S, Reddy S, <b class="me">de la Peña JB</b>, Song J, Tai H, Campbell Z, Hoyt K. <span class="pub-title">On the potential uses of ultrasound imaging for the detection of anesthesia-induced neuronal apoptosis in the developing brain.</span> <i>2020 IEEE International Ultrasonics Symposium (IUS)</i>. 2020:1-4.</li>
+      </ol>
+    </div>
+  </div></div>
+</section>
+
+<!-- FUNDING -->
+<section id="funding" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">Funding</p>
+    <h1>Support for our research</h1>
+    <p class="lead">Our research is supported by the following sponsors. We are grateful to the organ donors and their families, and to New Mexico Donor Services, whose generosity makes our human tissue research possible.</p>
+  </div></div>
+  <div class="section"><div class="wrap stack" style="gap:16px">
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Sponsor</th><th scope="col">Award</th><th scope="col">Title</th><th scope="col">Role</th><th scope="col">Period</th></tr></thead>
+        <tbody>
+          <tr><td>NIH HEAL Initiative, National Center for Advancing Translational Sciences (funded by NINDS)</td><td><a href="https://reporter.nih.gov/project-details/11216831">1R03TR005864-01</a></td><td>Role of PRR14 in Human Sensory Neurons in Oxaliplatin-Induced Peripheral Neuropathy</td><td>Contact PI (with Sascha R. Alles)</td><td class="date">Sept 2025 to Aug 2027</td></tr>
+          <tr><td>NIH, National Institute of General Medical Sciences, AIM CoBRE (P20GM121176)</td><td><a href="https://reporter.nih.gov/project-details/11535946">Research Project 5203</a></td><td>Investigating the Role of CircRNAs in Pain and Nociceptive Sensitization</td><td>Project Leader</td><td class="date">2025 to 2027</td></tr>
+          <tr><td>UNM Health Sciences Center</td><td>Pilot Funding Program</td><td>Pain, opioids, and circular RNAs</td><td>PI</td><td class="date">2026</td></tr>
+          <tr><td>Anthropic</td><td>AI for Science award</td><td>Role of circRNA in pain and nociception</td><td>PI</td><td class="date">2026</td></tr>
+          <tr><td>RNA Society, co-sponsored by Lexogen</td><td>RNA Salon award</td><td>New Mexico RNA Club</td><td>Organizer</td><td class="date">2025 to 2028</td></tr>
+          <tr><td>UNM Department of Anesthesiology &amp; Critical Care Medicine</td><td>Start-up funds</td><td>Lab establishment</td><td>PI</td><td class="date">Since 2023</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">NIH awards as listed in <a href="https://reporter.nih.gov/">NIH RePORTER</a>, checked October 2026.</p>
+  </div></div>
+</section>
+
+<!-- NEWS -->
+<section id="news" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">News</p>
+    <h1>Lab news</h1>
+    <p class="lead">Milestones, papers, and events from the de la Peña Lab.</p>
+  </div></div>
+  <div class="section"><div class="wrap stack" style="gap:48px">
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Date</th><th scope="col">News</th></tr></thead>
+        <tbody>
+          <tr><td class="date">Oct 2026</td><td>The lab receives an AI for Science award from Anthropic for "Role of circRNA in pain and nociception."</td></tr>
+          <tr><td class="date">Sept 24, 2026</td><td>New Mexico RNA Club annual retreat and anniversary, with invited speaker Dr. Praveen Patidar (New Mexico Tech).</td></tr>
+          <tr><td class="date">Sept 2026</td><td>The RNA Society renews the New Mexico RNA Club's RNA Salon award for two years (2026 to 2028).</td></tr>
+          <tr><td class="date">Sept 2026</td><td>NIH NIGMS continues funding for the lab's AIM CoBRE research project on circular RNAs in pain for 2026 to 2027.</td></tr>
+          <tr><td class="date">Aug 31, 2026</td><td>Study of sex-specific neuroimmune signatures in a mouse model of chronic back pain published in <a href="https://pubmed.ncbi.nlm.nih.gov/42674133/"><i>The Journal of Pain</i></a>, in collaboration with the Alles Lab.</td></tr>
+          <tr><td class="date">Aug 15, 2026</td><td>Jenna Demeter's first-author paper identifying <i>P2RY11</i> as an opioid-induced receptor in human nociceptors published in <a href="https://pubmed.ncbi.nlm.nih.gov/42645192/"><i>Cells</i></a>.</td></tr>
+          <tr><td class="date">May 7, 2026</td><td>Maddy Koch's first-author paper on the circular RNA landscape of human DRG published online in <a href="https://pubmed.ncbi.nlm.nih.gov/42152618/"><i>PAIN</i></a> and selected as an Editor's Choice.</td></tr>
+          <tr><td class="date">Mar 28, 2026</td><td>Dr. de la Peña speaks at the <a href="https://wrc.saseconnect.org/workshops/science-workshop">SASE West Regional Conference 2026 Science Workshop</a> at UNM: "Breaking the Pain Cycle: How Circular RNAs Are Redefining Pain Research."</td></tr>
+          <tr><td class="date">Mar 19, 2026</td><td>New Mexico RNA Club Trainee Mini-Symposium: five trainee lightning talks and three RNA Society membership awards.</td></tr>
+          <tr><td class="date">Sept 1, 2025</td><td>The lab's NIH R03 on PRR14 in human sensory neurons and oxaliplatin-induced neuropathy begins, with Dr. Sascha Alles as multiple PI.</td></tr>
+          <tr><td class="date">Aug 26, 2025</td><td>Collaborative study of a humanized anti-P2X4 antibody fragment in human DRG neurons published in <a href="https://pubmed.ncbi.nlm.nih.gov/40856314/"><i>Molecular Pain</i></a>.</td></tr>
+          <tr><td class="date">Jul 14, 2025</td><td>Jenna Demeter's first-author study of gabapentin in human DRG published in <a href="https://pubmed.ncbi.nlm.nih.gov/40657722/"><i>Molecular Pain</i></a>.</td></tr>
+          <tr><td class="date">2025</td><td>The lab's AIM CoBRE research project, "Investigating the Role of CircRNAs in Pain and Nociceptive Sensitization," is funded by NIH NIGMS.</td></tr>
+          <tr><td class="date">2025</td><td>The RNA Society accredits the UNM RNA Club as an RNA Salon, co-sponsored by Lexogen.</td></tr>
+          <tr><td class="date">Jan 23, 2025</td><td>Inaugural meeting of the RNA Club at UNM Health Sciences Center.</td></tr>
+          <tr><td class="date">Sept 2023</td><td>The de la Peña Lab opens at the University of New Mexico School of Medicine.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stack">
+      <h2>Press and honors</h2>
+      <div class="table-box">
+        <table>
+          <thead><tr><th scope="col">Date</th><th scope="col">Item</th></tr></thead>
+          <tbody>
+            <tr><td class="date">Sept 22, 2023</td><td><b>Interview with CNN Philippines.</b> Dr. de la Peña was a resource person on CNN Philippines and DOSTv's ExperTalk, discussing the cognitive benefits of brain puzzles and his path from Leyte to South Korea, the USA, and his own lab at UNM. <a href="https://drive.google.com/file/d/1-VmEbYaxVNZFNVnllxR_7k74Tv1-afCS/view">Watch the interview</a></td></tr>
+            <tr><td class="date">Jan 26, 2023</td><td><a href="https://www.evsu.edu.ph/university-news/balik-scientist-evsu-researchers-to-catalyze-research-in-neuropharmacology/">Balik Scientist, EVSU researchers to catalyze research in neuropharmacology</a> (Eastern Visayas State University)</td></tr>
+            <tr><td class="date">Nov 26, 2022</td><td><a href="https://medium.com/an-pukot-evc/balik-scientist-ng-leyte-4b7ef11cb913">Balik Scientist ng Leyte</a> (An Pukot, PSHS-Eastern Visayas Campus)</td></tr>
+            <tr><td class="date">Nov 2022</td><td><a href="https://region8.healthresearch.ph/index.php/8-news/301-bsp-balik-scientist-dr-june-bryan-de-la-pena-first-leg-of-engagement-in-the-region">Balik Scientist Dr. June Bryan de la Peña: first leg of engagement in the region</a> (Eastern Visayas Health Research and Development Consortium)</td></tr>
+            <tr><td class="date">2022</td><td><a href="https://region8.healthresearch.ph/index.php/10-latest/287-balik-scientist-dr-de-la-pena-amplifies-evhrdc-member-institutions-research-productivity-through-capacity-enhancement-activities">Balik Scientist Dr. de la Peña amplifies EVHRDC member institutions' research productivity through capacity-enhancement activities</a> (Eastern Visayas Health Research and Development Consortium)</td></tr>
+            <tr><td class="date">2021, 2022</td><td>Balik Scientist Award, Department of Science and Technology, Philippines</td></tr>
+            <tr><td class="date">Sept 7, 2018</td><td><a href="https://currentexchange.cshl.edu/blog/2018/visitor-of-the-week-89">Cold Spring Harbor Laboratory Visitor of the Week: June Bryan de la Peña</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- DATA & RESOURCES -->
+<section id="resources" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">circRNA in pain</p>
+    <h1>A resource for circular RNA in pain research</h1>
+    <p class="lead">A starting point for anyone studying circular RNAs (circRNAs) in pain: the basics, a curated reading list, methods notes, human reference datasets, and data from our lab.</p>
+  </div></div>
+
+  <div class="section"><div class="wrap stack" style="gap:28px">
+    <h2>circRNA 101</h2>
+    <div class="cards">
+      <div class="card"><span class="meta">What they are</span><h3>Closed loops of RNA</h3><p>CircRNAs form by back-splicing, which links the two ends of an RNA into a closed loop. Because of these linked ends, they resist exonucleases that degrade linear RNA.</p><a href="https://pubmed.ncbi.nlm.nih.gov/31269210/">Xiao and Wilusz, <i>Nucleic Acids Res</i> 2019</a></div>
+      <div class="card"><span class="meta">Where they are</span><h3>Rich in the nervous system</h3><p>CircRNAs are extraordinarily enriched in the mammalian brain, well conserved in sequence, and highly enriched in synapses.</p><a href="https://pubmed.ncbi.nlm.nih.gov/25921068/">Rybak-Wolf et al., <i>Mol Cell</i> 2015</a></div>
+      <div class="card"><span class="meta">How long they last</span><h3>Long-lived</h3><p>In stimulated cells, circRNAs stayed stable while mRNAs and microRNAs changed within minutes. Most circRNAs detected were relatively long-lived.</p><a href="https://pubmed.ncbi.nlm.nih.gov/26657629/">Enuka et al., <i>Nucleic Acids Res</i> 2016</a></div>
+      <div class="card"><span class="meta">How to find them</span><h3>Read the junction</h3><p>Detection is typically based on short-read RNA sequencing processed with computational tools. In a benchmark of 16 tools, precision was similar, but the number of circRNAs called differed widely.</p><a href="https://pubmed.ncbi.nlm.nih.gov/37443337/">Vromman et al., <i>Nat Methods</i> 2023</a></div>
+    </div>
+  </div></div>
+
+  <div class="section alt"><div class="wrap stack" style="gap:44px">
+    <div class="stack" style="gap:10px">
+      <p class="eyebrow" style="color:var(--link)">Reading list</p>
+      <h2>circRNAs and pain: key papers</h2>
+      <p class="key prose">Curated by the lab and checked against PubMed in October 2026. Each summary restates the paper's own abstract. Newest first within each group. Know a paper we missed? <a href="mailto:jdelapena@salud.unm.edu?subject=circRNA%20reading%20list">Send it to us</a>.</p>
+    </div>
+    <div class="stack">
+      <h2 style="font-size:26px">Human tissue</h2>
+      <p class="key prose">Studies that measured circRNAs in human samples.</p>
+      <ul class="rlist">
+<li><p>Koch MR, Demeter JB, Hochrein M, Alles SRA, Westlund KN, Ehsanian R, <b class="me">de la Peña JBI</b>. <span class="pub-title">Characterization of the circular RNA landscape of human dorsal root ganglia reveals a neurotrophin-related circRNA is modulated by opioid exposure.</span> <i>Pain</i>. 2026;167(7):1615-1630. doi: <a href="https://doi.org/10.1097/j.pain.0000000000003987">10.1097/j.pain.0000000000003987</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/42152618/">42152618</a>.</p><p class="finding">Total RNA sequencing of human DRG from opioid-exposed donors and matched controls. Opioid exposure was associated with a global reduction in circRNA abundance and 43 differentially expressed circRNAs, including lower circNTRK2.</p></li>
+<li><p>Irie T, Shum R, Deni I, Hunkele A, Le Rouzic V, Xu J, Wilson R, Fischer GW, Pasternak GW, Pan YX. <span class="pub-title">Identification of Abundant and Evolutionarily Conserved Opioid Receptor Circular RNAs in the Nervous System Modulated by Morphine.</span> <i>Mol Pharmacol</i>. 2019;96(2):247-258. doi: <a href="https://doi.org/10.1124/mol.118.113977">10.1124/mol.118.113977</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31243060/">31243060</a>.</p><p class="finding">Opioid receptor circRNAs (circOprm1) were detected in rodent and human brain and spinal cord. Chronic morphine increased two of these circRNAs 1.5- to 1.6-fold relative to linear Oprm1 mRNA in mouse brain.</p></li>
+<li><p>Wang L, Luo T, Bao Z, Li Y, Bu W. <span class="pub-title">Intrathecal circHIPK3 shRNA alleviates neuropathic pain in diabetic rats.</span> <i>Biochem Biophys Res Commun</i>. 2018;505(3):644-650. doi: <a href="https://doi.org/10.1016/j.bbrc.2018.09.158">10.1016/j.bbrc.2018.09.158</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30286957/">30286957</a>.</p><p class="finding">circHIPK3 was highly abundant in serum from people with type 2 diabetes and neuropathic pain, and in DRG from diabetic rats. Silencing circHIPK3 alleviated neuropathic pain in the rats.</p></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h2 style="font-size:26px">Mechanisms in rodent models</h2>
+      <p class="key prose">Rodent findings are hypotheses for human tissue, not conclusions about it.</p>
+      <ul class="rlist">
+<li><p>Liu XD, Jin T, Tao Y, <i>et al.</i> <span class="pub-title">DHX9/DNA-tandem repeat-dependent downregulation of ciRNA-Fmn1 in the dorsal horn is required for neuropathic pain.</span> <i>Acta Pharmacol Sin</i>. 2023;44(9):1748-1767. doi: <a href="https://doi.org/10.1038/s41401-023-01082-x">10.1038/s41401-023-01082-x</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37095197/">37095197</a>.</p><p class="finding">ciRNA-Fmn1 fell in spinal dorsal horn neurons after nerve injury. Blocking that decrease attenuated pain hypersensitivity in mice.</p></li>
+<li><p>Xiong W, Wei M, Zhang L, Wang J, Liu F, Wang Z. <span class="pub-title">Chronic constriction injury-induced changes in circular RNA expression profiling of the dorsal root ganglion in a rat model of neuropathic pain.</span> <i>BMC Neurosci</i>. 2022;23(1):64. doi: <a href="https://doi.org/10.1186/s12868-022-00745-5">10.1186/s12868-022-00745-5</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36376788/">36376788</a>.</p><p class="finding">Sequencing of rat DRG after chronic constriction injury identified 374 differentially expressed circRNAs (290 up, 84 down).</p></li>
+<li><p>Cai W, Zhang Y, Su Z. <span class="pub-title">ciRS-7 targeting miR-135a-5p promotes neuropathic pain in CCI rats via inflammation and autophagy.</span> <i>Gene</i>. 2020;736:144386. doi: <a href="https://doi.org/10.1016/j.gene.2020.144386">10.1016/j.gene.2020.144386</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31978512/">31978512</a>.</p><p class="finding">ciRS-7 in the spinal dorsal horn tracked with neuropathic pain in rats and acted by sponging miR-135a-5p.</p></li>
+<li><p>Zhang SB, Lin SY, Liu M, <i>et al.</i> <span class="pub-title">CircAnks1a in the spinal cord regulates hypersensitivity in a rodent model of neuropathic pain.</span> <i>Nat Commun</i>. 2019;10(1):4119. doi: <a href="https://doi.org/10.1038/s41467-019-12049-0">10.1038/s41467-019-12049-0</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31511520/">31511520</a>.</p><p class="finding">Nerve ligation increased circAnks1a in dorsal horn neurons. Knockdown attenuated pain-like behavior, and circAnks1a raised VEGFB through YBX1 and by sponging miR-324-3p.</p></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h2 style="font-size:26px">Reviews</h2>
+      <p class="key prose">Broader overviews of non-coding RNAs in pain.</p>
+      <ul class="rlist">
+<li><p>Zhang C, Gao R, Zhou R, Chen H, Liu C, Zhu T, Chen C. <span class="pub-title">The emerging power and promise of non-coding RNAs in chronic pain.</span> <i>Front Mol Neurosci</i>. 2022;15:1037929. doi: <a href="https://doi.org/10.3389/fnmol.2022.1037929">10.3389/fnmol.2022.1037929</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36407760/">36407760</a>.</p><p class="finding">Review of miRNAs, circRNAs, and lncRNAs across neuropathic, inflammatory, and cancer pain, including candidate biomarkers.</p></li>
+<li><p>Jiang M, Wang Y, Wang J, Feng S, Wang X. <span class="pub-title">The etiological roles of miRNAs, lncRNAs, and circRNAs in neuropathic pain: A narrative review.</span> <i>J Clin Lab Anal</i>. 2022;36(8):e24592. doi: <a href="https://doi.org/10.1002/jcla.24592">10.1002/jcla.24592</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35808924/">35808924</a>.</p><p class="finding">Narrative review of non-coding RNA changes reported in neuropathic pain, including circHIPK3, ciRS-7, and circAnks1a.</p></li>
+<li><p>Xu D, Ma X, Sun C, Han J, Zhou C, Chan MTV, Wu WKK. <span class="pub-title">Emerging roles of circular RNAs in neuropathic pain.</span> <i>Cell Prolif</i>. 2021;54(12):e13139. doi: <a href="https://doi.org/10.1111/cpr.13139">10.1111/cpr.13139</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34623006/">34623006</a>.</p><p class="finding">Summarizes circRNA profiling studies in neuropathic pain and the mechanisms of specific circRNAs.</p></li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="section"><div class="wrap stack" style="gap:44px">
+    <div class="stack">
+      <h2 style="font-size:26px">Methods notes</h2>
+      <p class="key prose">Papers we rely on when detecting and quantifying circRNAs.</p>
+      <ul class="rlist">
+<li><p>Vromman M, Anckaert J, Bortoluzzi S, <i>et al.</i> <span class="pub-title">Large-scale benchmarking of circRNA detection tools reveals large differences in sensitivity but not in precision.</span> <i>Nat Methods</i>. 2023;20(8):1159-1169. doi: <a href="https://doi.org/10.1038/s41592-023-01944-6">10.1038/s41592-023-01944-6</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37443337/">37443337</a>.</p><p class="finding">Sixteen detection tools were compared. Precision was high and similar across tools, but the number of circRNAs each tool predicted ranged from 1,372 to 58,032.</p></li>
+<li><p>Zhang J, Chen S, Yang J, Zhao F. <span class="pub-title">Accurate quantification of circular RNAs identifies extensive circular isoform switching events.</span> <i>Nat Commun</i>. 2020;11(1):90. doi: <a href="https://doi.org/10.1038/s41467-019-13840-9">10.1038/s41467-019-13840-9</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31900416/">31900416</a>.</p><p class="finding">CIRIquant quantifies circRNAs and corrects for RNase R treatment bias, with a built-in differential expression pipeline.</p></li>
+<li><p>Xiao MS, Wilusz JE. <span class="pub-title">An improved method for circular RNA purification using RNase R that efficiently removes linear RNAs containing G-quadruplexes or structured 3' ends.</span> <i>Nucleic Acids Res</i>. 2019;47(16):8755-8769. doi: <a href="https://doi.org/10.1093/nar/gkz576">10.1093/nar/gkz576</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31269210/">31269210</a>.</p><p class="finding">Standard RNase R protocols can fail to digest more than 20% of highly expressed linear RNAs. Adding a poly(A) tail first and replacing K+ with Li+ in the buffer largely solve this.</p></li>
+<li><p>Hansen TB. <span class="pub-title">Improved circRNA Identification by Combining Prediction Algorithms.</span> <i>Front Cell Dev Biol</i>. 2018;6:20. doi: <a href="https://doi.org/10.3389/fcell.2018.00020">10.3389/fcell.2018.00020</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29556495/">29556495</a>.</p><p class="finding">Compared 11 algorithms. Algorithm-specific false positives were resolved by keeping circRNAs called by two or more tools.</p></li>
+<li><p>Szabo L, Salzman J. <span class="pub-title">Detecting circular RNAs: bioinformatic and experimental challenges.</span> <i>Nat Rev Genet</i>. 2016;17(11):679-692. doi: <a href="https://doi.org/10.1038/nrg.2016.114">10.1038/nrg.2016.114</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27739534/">27739534</a>.</p><p class="finding">Review of the experimental and bioinformatic biases that complicate circRNA discovery, and statistical ways to address them.</p></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h2 style="font-size:26px">Human DRG reference datasets</h2>
+      <p class="key prose">Public human DRG resources from other groups that circRNA data can be compared against.</p>
+      <ul class="rlist">
+<li><p>Arendt-Tranholm A, Mwirigi JM, Price TJ. <span class="pub-title">RNA isoform expression landscape of the human dorsal root ganglion generated from long-read sequencing.</span> <i>Pain</i>. 2024;165(11):2468-2481. doi: <a href="https://doi.org/10.1097/j.pain.0000000000003255">10.1097/j.pain.0000000000003255</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38809314/">38809314</a>.</p><p class="finding">Long-read sequencing of human DRG from 3 donors documented 19,547 validated isoforms of protein-coding genes.</p></li>
+<li><p>Zeidler M, Tavares-Ferreira D, Brougher J, Price TJ, Kress M. <span class="pub-title">NOCICEPTRA2.0 - A comprehensive ncRNA atlas of human native and iPSC-derived sensory neurons.</span> <i>iScience</i>. 2023;26(12):108525. doi: <a href="https://doi.org/10.1016/j.isci.2023.108525">10.1016/j.isci.2023.108525</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38162030/">38162030</a>.</p><p class="finding">A searchable database of small non-coding RNAs in human DRG and stem cell-derived sensory neurons.</p></li>
+<li><p>Tavares-Ferreira D, Shiers S, Ray PR, <i>et al.</i> <span class="pub-title">Spatial transcriptomics of dorsal root ganglia identifies molecular signatures of human nociceptors.</span> <i>Sci Transl Med</i>. 2022;14(632):eabj8186. doi: <a href="https://doi.org/10.1126/scitranslmed.abj8186">10.1126/scitranslmed.abj8186</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35171654/">35171654</a>.</p><p class="finding">Spatial transcriptomics of DRG neurons from 8 organ donors defined 12 human sensory neuron clusters.</p></li>
+<li><p>Ray P, Torck A, Quigley L, <i>et al.</i> <span class="pub-title">Comparative transcriptome profiling of the human and mouse dorsal root ganglia: an RNA-seq-based resource for pain and sensory neuroscience research.</span> <i>Pain</i>. 2018;159(7):1325-1345. doi: <a href="https://doi.org/10.1097/j.pain.0000000000001217">10.1097/j.pain.0000000000001217</a>. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29561359/">29561359</a>.</p><p class="finding">RNA-seq of human DRG from organ donors compared with mouse DRG, released as an online searchable repository.</p></li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="section alt"><div class="wrap stack" style="gap:28px">
+    <h2>Data and tools from our lab</h2>
+    <div class="cards">
+    <div class="card">
+      <span class="meta">Dataset · <i>PAIN</i> 2026</span>
+      <h3>Human DRG circRNA sequencing</h3>
+      <p>Total RNA sequencing of human DRG from opioid-exposed and control donors (Koch et al., PMID 42152618). Data are available to qualified researchers on request under a data transfer agreement, and submission to the Sequence Read Archive (SRA) is in progress.</p>
+      <a href="mailto:jdelapena@salud.unm.edu?subject=Request%3A%20human%20DRG%20circRNA%20data">Request the data</a>
+    </div>
+    <div class="card">
+      <span class="meta">Dataset · Molecular Pain 2025</span>
+      <h3>Gabapentin human DRG supplementary data</h3>
+      <p>Supplementary data for "Gabapentin's effect on human dorsal root ganglia: Donor-specific electrophysiological and transcriptomic profiles" (PMID 40657722).</p>
+      <a href="https://docs.google.com/folderview?id=1ffHTnfuDMx_9W90TEXvkgdyhzXYylWeS">Open the data folder</a>
+    </div>
+    <div class="card">
+      <span class="meta">Protocol · Methods in Molecular Biology 2025</span>
+      <h3>Inhibition of nonsense-mediated decay in DRG neurons</h3>
+      <p>Step-by-step protocol chapter from the lab, published in <i>RNA Analysis</i>.</p>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/40699432/">View on PubMed</a>
+    </div>
+    <div class="card">
+      <span class="meta">Code · In development</span>
+      <h3>Total RNA-seq pipeline</h3>
+      <p>A pipeline for quantifying mRNA, lncRNA, and circRNA from total RNA sequencing. We are still building it, and we will share the code here when it is ready.</p>
+    </div>
+    <div class="card">
+      <span class="meta">Review · Submitted</span>
+      <h3>Expanding the Human Sensory Atlas to Circular and Long Non-Coding RNAs</h3>
+      <p>Invited Topical Review by Koch, Campomayor, and de la Peña, submitted to <i>PAIN</i>. We will link it here once it is published.</p>
+    </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- RNA CLUB -->
+<section id="rnaclub" data-view hidden>
+  <div class="band"><div class="wrap stack">
+    <p class="eyebrow">New Mexico RNA Club</p>
+    <h1>A statewide community for RNA science</h1>
+    <p class="lead">The New Mexico RNA Club is a statewide community of RNA researchers, trainees, and core staff. Founded at UNM Health Sciences Center in January 2025, the club is an RNA Society-accredited RNA Salon co-sponsored by Lexogen. We meet in person, with hybrid options when useful, to share new RNA science and to build collaborations across New Mexico.</p>
+  </div></div>
+  <div class="section"><div class="wrap split">
+    <div class="stack">
+      <div class="logo-box"><img src="img/rnasalon_lexogen.jpg" alt="RNA Society and Lexogen logos" width="775" height="338"></div>
+      <h2 style="font-size:24px">Our goals</h2>
+      <p>(1) Stimulate RNA research in New Mexico, (2) give students and postdocs opportunities to present and lead, (3) connect wet-lab, computational, clinical, and core groups, (4) introduce emerging RNA technologies, and (5) link New Mexico researchers with the RNA Society.</p>
+    </div>
+    <div class="stack">
+      <h2 style="font-size:24px">Who we are</h2>
+      <p><b>Co-founders and organizers:</b> June Bryan de la Peña and Arun Kumar Ganesan</p>
+      <p><b>Senior advisors:</b> Viswanathan Palanisamy and Nora Perrone-Bizzozero</p>
+      <p><b>Partner:</b> UNM HSC Analytical &amp; Translational Genomics Shared Resource</p>
+      <p>Links: <a href="https://www.rnasociety.org/salons/current-rna-salons/">RNA Society Salon listing</a> · <a href="https://www.rnasociety.org/">RNA Society</a> · <a href="https://www.lexogen.com/">Lexogen</a></p>
+    </div>
+  </div></div>
+  <div class="section alt"><div class="wrap stack" style="gap:24px">
+    <h2>Upcoming events</h2>
+    <p>Dates for the 2026 to 2027 season will be posted here. To join the mailing list, email jdelapena@salud.unm.edu.</p>
+  </div></div>
+  <div class="section"><div class="wrap stack" style="gap:24px">
+    <h2>Past events</h2>
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Date</th><th scope="col">Event</th></tr></thead>
+        <tbody>
+          <tr><td class="date">Sept 24, 2026</td><td>Annual retreat and anniversary. Dr. Praveen Patidar (New Mexico Tech): "PARP1-XRN2-DDX23 Axis in Preventing R-loop-Associated Genomic Instability"</td></tr>
+          <tr><td class="date">Mar 19, 2026</td><td>Trainee Mini-Symposium (lightning talks). RNA Society membership awards: Jayden Montoya (undergraduate), Cynthia Taylor (graduate), Sumira Phatak (postdoc)</td></tr>
+          <tr><td class="date">Dec 18, 2025</td><td>Autumn T. LaPointe (Seoul virus RNA replication kinetics); William H. Wylie, MD ("Neural circ-uitry: Circular RNA and Mental Illness")</td></tr>
+          <tr><td class="date">Nov 11, 2025</td><td>UNM Research &amp; Discovery Week session: "Advancing RNA Biology in the UNM Community"</td></tr>
+          <tr><td class="date">Oct 23, 2025</td><td>First meeting as an accredited RNA Salon. Vasudevan Sekar (HuR as a therapeutic target for oral mucositis)</td></tr>
+          <tr><td class="date">May 22, 2025</td><td>Aravinthkumar Jayabalan (G3BP1/G3BP2, stress granules to lysosomes); Nora Perrone-Bizzozero (HuD/KHSRP regulation of alternative splicing in neurons)</td></tr>
+          <tr><td class="date">Apr 23, 2025</td><td>Spatial technologies seminar with 10x Genomics and the UNM Comprehensive Cancer Center: Xenium In Situ and Visium HD</td></tr>
+          <tr><td class="date">Mar 27, 2025</td><td>ATG Shared Resource session on single-cell, spatial, long-read, small-RNA, tRNA-seq, and bioinformatics services</td></tr>
+          <tr><td class="date">Feb 20, 2025</td><td>Himadri Nath (ISG15 splice variant and influenza polymerase); Amy Gardiner ("RNA and sugar: what could be better?")</td></tr>
+          <tr><td class="date">Jan 23, 2025</td><td>Inaugural meeting. Maddy Koch (circRNA regulation of BDNF in pain); Arun Ganesan (heavy metal toxicity and epigenetic instability in colon cells)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <b>de la Peña Lab</b>
+      <span>MSC 10-6000, 2211 Lomas Blvd. NE, ACM 200</span>
+      <span>University of New Mexico School of Medicine</span>
+      <span>Albuquerque, NM 87106</span>
+    </div>
+    <div class="col">
+      <span>Office: 505-272-3401</span>
+      <span>jdelapena@salud.unm.edu</span>
+      <span><a href="https://scholar.google.com/citations?user=zfl74V8AAAAJ&amp;hl=en">Google Scholar</a> · <a href="https://orcid.org/0000-0001-9391-7595">ORCID</a> · <a href="https://www.researchgate.net/profile/June-Bryan-De-La-Pena">ResearchGate</a> · <a href="https://www.linkedin.com/in/junebryandelapena">LinkedIn</a> · <a href="https://twitter.com/JBIdelaPena">X (Twitter)</a> · <a href="https://hsc.unm.edu/directory/bryandelapena-june.html">UNM Profile</a></span>
+      <span><a href="https://hsc.unm.edu/medicine/departments/anesthesiology/">Department of Anesthesiology &amp; Critical Care Medicine</a></span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var cv=document.getElementById('neuron'); if(!cv) return;
+  var stage=document.getElementById('neuron-stage'), tip=document.getElementById('neuron-tip'), hintEl=document.getElementById('zoom-hint');
+  var cap=document.getElementById('neuron-cap'), fig=document.getElementById('zoom-fig');
+  var modeBtns=[].slice.call(document.querySelectorAll('#neuron-modes button'));
+  var pinsBox=document.getElementById('zoom-pins'), card=document.getElementById('zoom-card'), cardX=document.getElementById('zoom-card-x');
+  var ctx=cv.getContext('2d'), W=0,H=0,m=0,dpr=1, SA=1;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mode='base', touring=!reduce, modeSince=performance.now(), openPin=null, nextA=0;
+  var t0=performance.now(), pulses=[], hover=null, mouse=null;
+  var C={mem:'rgba(95,211,195,0.95)',fill:'rgba(95,211,195,0.10)',nuc:'rgba(95,211,195,0.22)',circ:'#CFE6FF',ntrk:'#F2B544',rec:'#FF7E6B',lbl:'rgba(200,214,224,0.75)',mrna:'rgba(160,190,210,0.55)',blood:'#C9454A',wip:'#F2B544'};
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function bez(p0,p1,p2,p3,n){var o=[];for(var i=0;i<=n;i++){var t=i/n,u=1-t;o.push({x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y});}return o}
+  function P(x,y){return {x:x*W,y:y*H}}
+  function at(pts,s){var i=Math.min(pts.length-2,Math.max(0,Math.floor(s*(pts.length-1)))),f=s*(pts.length-1)-i;var a=pts[i],b=pts[i+1];return {x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f}}
+  function stroke(pts,w,col){ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(var i=1;i<pts.length;i++)ctx.lineTo(pts[i].x,pts[i].y);ctx.lineWidth=w;ctx.strokeStyle=col;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke()}
+  function ell(x,y,rx,ry,rot){ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,6.283)}
+  function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+  function label(txt,x,y,align,rot){ctx.save();ctx.font='600 12px "IBM Plex Sans", Arial, sans-serif';ctx.fillStyle=C.lbl;ctx.textAlign=align||'left';ctx.translate(x,y);if(rot)ctx.rotate(rot);ctx.fillText(txt,0,0);ctx.restore()}
+  function glowAt(x,y,r){ctx.save();ctx.globalAlpha=SA;var gr=ctx.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,'rgba(255,255,255,0.95)');gr.addColorStop(1,'rgba(95,211,195,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(x,y,r,0,6.283);ctx.fill();ctx.restore()}
+
+  /* ---------- Geometry ---------- */
+  var path=[],branchIdx=0,soma={x:0,y:0,r:0},ends=[],stem=[],circs=[],recs=[],mrnas=[],vessel=[],vf=null,cord={};
+  function layout(){
+    var r=stage.getBoundingClientRect();dpr=Math.min(window.devicePixelRatio||1,2);
+    W=r.width;H=r.height;m=Math.min(W,H);if(!W)return;
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    soma={x:0.54*W,y:0.32*H,r:0.13*m};
+    var J=P(0.54,0.62);
+    var periph=bez(P(0.06,0.80),P(0.20,0.86),P(0.36,0.62),J,60);
+    var central=bez(J,P(0.70,0.62),P(0.80,0.50),P(0.905,0.46),50);
+    path=periph.concat(central.slice(1));branchIdx=periph.length-1;
+    ends=[P(0.02,0.70),P(0.03,0.86),P(0.07,0.95)];
+    stem=bez({x:soma.x,y:soma.y+soma.r},{x:soma.x-0.02*W,y:soma.y+soma.r+0.08*H},{x:J.x+0.02*W,y:J.y-0.10*H},J,24);
+    vessel=bez(P(0.56,1.08),P(0.68,0.90),P(0.80,0.86),P(0.90,0.80),40);vf=at(vessel,0.6);
+    cord={x:0.90*W,y:-20,w:0.14*W,h:H+40};
+    seed();buildPins();render();
+  }
+  function inSoma(){var a=rnd(0,6.283),d=Math.sqrt(Math.random())*soma.r*0.78;return {x:soma.x+Math.cos(a)*d,y:soma.y+Math.sin(a)*d}}
+  function seed(){
+    circs=[];for(var i=0;i<34;i++){circs.push({p:inSoma(),vx:rnd(-.15,.15),vy:rnd(-.15,.15),ntrk:i%7===0,keep:i===0?0:Math.random(),a:1,ph:rnd(0,6.28)})}
+    recs=[];for(var k=0;k<14;k++){recs.push({ang:-2.6+k*(2.6*2/13)+rnd(-.05,.05),keep:k/14,a:k<3?1:0})}
+    mrnas=[];for(var j=0;j<10;j++){var q=inSoma();mrnas.push({x:q.x,y:q.y,ang:rnd(0,6.28)})}
+    if(reduce){circs.forEach(function(c){c.a=target(c)});recs.forEach(function(r){r.a=recTarget(r)})}
+  }
+  function target(c){if(mode!=='opioid')return 1;if(c.ntrk)return c.keep<0.3?1:0;return c.keep<0.55?1:0}
+  function recTarget(r){return mode==='opioid'?1:(r.keep<0.22?1:0)}
+  function fire(){pulses.push({s:0})}
+
+  /* ---------- Drawing ---------- */
+  function scene(t){
+    // spinal cord
+    rr(cord.x,cord.y,cord.w,cord.h,0.05*W);ctx.fillStyle=C.fill;ctx.fill();ctx.lineWidth=3;ctx.strokeStyle=C.mem;ctx.stroke();
+    label('SKIN',0.03*W,0.62*H);label('DORSAL ROOT GANGLION',soma.x+soma.r*0.15,soma.y-soma.r-30);
+    label('SPINAL CORD',0.955*W,0.78*H,'center',-Math.PI/2);
+    var pe=path[0];ends.forEach(function(e){stroke([pe,{x:(pe.x+e.x)/2+4,y:(pe.y+e.y)/2},e],2,C.mem)});
+    stroke(path,4,C.mem);stroke(stem,4,C.mem);
+    ctx.beginPath();ctx.arc(soma.x,soma.y,soma.r,0,6.283);ctx.fillStyle=C.fill;ctx.fill();ctx.lineWidth=3;ctx.strokeStyle=C.mem;ctx.stroke();
+    ctx.beginPath();ctx.arc(soma.x+soma.r*0.18,soma.y-soma.r*0.12,soma.r*0.32,0,6.283);ctx.fillStyle=C.nuc;ctx.fill();
+    mrnas.forEach(function(q){ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.ang+Math.sin(t*.5+q.ang)*.3);ctx.beginPath();for(var i=0;i<=10;i++){var x=-9+i*1.8,y=Math.sin(i*1.1+t*2)*1.6;i?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.strokeStyle=C.mrna;ctx.lineWidth=1.4;ctx.stroke();ctx.restore()});
+    recs.forEach(function(r){var g=recTarget(r);r.a+=(g-r.a)*0.06;if(r.a<0.02)return;var x=soma.x+Math.cos(r.ang)*soma.r,y=soma.y+Math.sin(r.ang)*soma.r;r.x=x;r.y=y;
+      ctx.save();ctx.globalAlpha=SA*r.a;ctx.translate(x,y);ctx.rotate(r.ang+Math.PI/2);ctx.strokeStyle=C.rec;ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-7);ctx.moveTo(0,-7);ctx.lineTo(-4,-11);ctx.moveTo(0,-7);ctx.lineTo(4,-11);ctx.stroke();ctx.restore()});
+    circs.forEach(function(c){var g=target(c);c.a+=(g-c.a)*0.05;
+      if(!reduce){c.p.x+=c.vx;c.p.y+=c.vy;var dx=c.p.x-soma.x,dy=c.p.y-soma.y;if(Math.hypot(dx,dy)>soma.r*0.8){c.vx=-c.vx;c.vy=-c.vy;c.p.x-=dx*0.02;c.p.y-=dy*0.02}}
+      c.x=c.p.x;c.y=c.p.y;if(c.a<0.03)return;
+      var r=c.ntrk?5.2:3.8;ctx.save();ctx.globalAlpha=SA*c.a;ctx.beginPath();ctx.arc(c.x,c.y,r+Math.sin(t*2+c.ph)*0.4,0,6.283);
+      if(c.ntrk){ctx.fillStyle='rgba(242,181,68,0.25)';ctx.fill();ctx.strokeStyle=C.ntrk;ctx.lineWidth=2.2}else{ctx.strokeStyle=C.circ;ctx.lineWidth=1.6}ctx.stroke();ctx.restore()});
+    for(var i=pulses.length-1;i>=0;i--){var pu=pulses[i];pu.s+=reduce?1:0.011;if(pu.s>1){pulses.splice(i,1);continue}
+      var q=at(path,pu.s);glowAt(q.x,q.y,16);
+      if(Math.abs(pu.s*(path.length-1)-branchIdx)<3){ctx.beginPath();ctx.arc(soma.x,soma.y,soma.r+4,0,6.283);ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=2;ctx.stroke()}}
+  }
+  // dashed amber outlines around the regions we are asking about next
+  function outlines(t,a){
+    var g=(Math.sin(t*2.4)+1)/2;ctx.save();ctx.globalAlpha=a*(0.65+0.35*g);ctx.setLineDash([7,6]);ctx.lineDashOffset=-t*12;ctx.strokeStyle=C.wip;ctx.lineWidth=2.2;
+    ctx.beginPath();ctx.arc(soma.x,soma.y,soma.r+18,0,6.283);ctx.stroke();
+    rr(cord.x-8,0.06*H,cord.w,0.88*H,0.05*W);ctx.stroke();
+    ctx.beginPath();ctx.arc(path[0].x+0.02*W,path[0].y+0.06*H,0.11*m,0,6.283);ctx.stroke();
+    ctx.restore();
+  }
+  function draw(now){
+    var t=(now-t0)/1000;ctx.clearRect(0,0,W,H);if(!W)return;
+    nextA+=((mode==='next'?1:0)-nextA)*(reduce?1:0.08);
+    SA=1-0.45*nextA;ctx.save();ctx.globalAlpha=SA;scene(t);ctx.restore();SA=1;
+    if(nextA>0.02)outlines(t,nextA);
+    if(hover&&hover.x!=null){ctx.beginPath();ctx.arc(hover.x,hover.y,hover.rr||10,0,6.283);ctx.strokeStyle='rgba(255,255,255,0.8)';ctx.lineWidth=1.5;ctx.stroke()}
+  }
+  function render(){draw(performance.now())}
+
+  /* ---------- Pins and card ---------- */
+  var KOCH='https://pubmed.ncbi.nlm.nih.gov/42152618/', DEM='https://pubmed.ncbi.nlm.nih.gov/42645192/';
+  var PINS=[
+    {k:'pub',at:function(){return [soma.x-soma.r*1.35,soma.y+soma.r*0.3]},title:'circNTRK2 is lower after opioids',body:'circNTRK2 comes from the gene for the TrkB receptor. It was lower in DRG from opioid-exposed donors and after repeated morphine in a nociceptor-like cell line.',href:KOCH,link:'Koch et al., PAIN 2026'},
+    {k:'pub',at:function(){return [soma.x+soma.r*1.4,soma.y-soma.r*0.55]},title:'A human-only opioid response',body:'Morphine induces the purinergic receptor gene P2RY11 in human stem cell-derived nociceptors. Mice and rats lack this gene.',href:DEM,link:'Demeter et al., Cells 2026'},
+    {k:'wip',at:function(){return [soma.x-(soma.r+18)*0.72,soma.y-(soma.r+18)*0.72]},title:'Cell type by cell type',body:'Human DRG contains many types of sensory neurons. We are mapping which types carry which circRNAs.'},
+    {k:'wip',at:function(){return [0.30*W,0.48*H]},title:'What do these circRNAs do?',body:'We are testing whether opioid-sensitive circRNAs change how nociceptors respond.'},
+    {k:'wip',at:function(){return [cord.x+0.02*W,0.16*H]},title:'Beyond the ganglion',body:'We are extending our non-coding RNA measurements from the DRG to the spinal cord.'},
+    {k:'wip',at:function(){return [path[0].x+0.13*m,path[0].y-0.04*H]},title:'Chemotherapy and nerve injury',body:'We are testing how human sensory neurons respond to chemotherapy drugs that damage nerves. Our oxaliplatin project is funded by an NIH R03.',href:'https://reporter.nih.gov/project-details/11216831',link:'NIH RePORTER'}
+  ];
+  function buildPins(){
+    pinsBox.innerHTML='';
+    PINS.forEach(function(p){if(p.k==='wip'&&mode!=='next')return;var xy=p.at(),b=document.createElement('button');
+      b.type='button';b.className='pin '+p.k;b.textContent=p.k==='pub'?'✓':'?';
+      b.setAttribute('aria-label',(p.k==='pub'?'Published finding: ':'In progress: ')+p.title);b.setAttribute('aria-expanded',openPin===p?'true':'false');
+      b.style.left=(xy[0]/W*100)+'%';b.style.top=(xy[1]/H*100)+'%';
+      b.addEventListener('click',function(e){e.stopPropagation();touring=false;if(openPin===p)closeCard();else openCard(p)});
+      pinsBox.appendChild(b)});
+  }
+  function openCard(p){
+    openPin=p;var tag=card.querySelector('.ztag'),a=card.querySelector('a');
+    tag.className='ztag '+p.k;tag.textContent=p.k==='pub'?'Published finding':'In progress';
+    card.querySelector('h3').textContent=p.title;card.querySelector('p').textContent=p.body+(p.k==='wip'?' Details will follow publication.':'');
+    if(p.href){a.href=p.href;a.textContent=p.link;a.hidden=false}else a.hidden=true;
+    card.hidden=false;buildPins();showTip(null);
+  }
+  function closeCard(){if(!openPin&&card.hidden)return;openPin=null;card.hidden=true;buildPins()}
+  cardX.addEventListener('click',function(e){e.stopPropagation();closeCard()});
+  card.addEventListener('click',function(e){e.stopPropagation()});
+
+  /* ---------- Modes ---------- */
+  var CAPS={
+    base:'A pain-sensing neuron from the dorsal root ganglion (DRG). CircRNAs are shown only in the cell body because our data come from DRG tissue. Solid pins mark published findings. Illustration, not to scale.',
+    opioid:'In DRG from opioid-exposed donors, circRNAs are less abundant and circNTRK2 is lower (<a href="'+KOCH+'">Koch et al., <i>PAIN</i> 2026</a>). Morphine induces the <i>P2RY11</i> gene in human stem cell-derived nociceptors, and P2Y11 protein rises in cultured human DRG neurons (<a href="'+DEM+'">Demeter et al., <i>Cells</i> 2026</a>). Illustration, not to scale.',
+    next:'Dashed markers show questions we are working on now, from the cell body to the spinal cord. Tap one to read it. Details will follow publication. Illustration, not to scale.'
+  };
+  var HINTS={base:'Hover to explore. Tap the nerve endings to send a signal.',opioid:'Watch the circRNAs and receptors change.',next:'Tap a dashed marker to read the question.'};
+  var HINTS_S={base:'Tap to explore.',opioid:'Watch the change.',next:'Tap a dashed marker.'};
+  function setMode(md){
+    mode=md;modeSince=performance.now();closeCard();
+    modeBtns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===md?'true':'false')});
+    cap.innerHTML=CAPS[md];hintEl.textContent=(stage.clientWidth<520?HINTS_S:HINTS)[md];buildPins();
+    if(reduce){circs.forEach(function(c){c.a=target(c)});recs.forEach(function(r){r.a=recTarget(r)});render()}
+  }
+  modeBtns.forEach(function(b){b.addEventListener('click',function(){touring=false;setMode(b.dataset.m)})});
+
+  /* ---------- Pointer and tooltips ---------- */
+  var labels={
+    circ:['Circular RNA (circRNA)','A closed loop of RNA. We measure circRNAs in human DRG tissue, where these cell bodies sit.'],
+    ntrk:['circNTRK2','A circRNA from the gene for the TrkB receptor. It is lower in DRG from opioid-exposed donors.'],
+    rec:['P2Y11 receptor','Morphine induces its gene, P2RY11, in human stem cell-derived nociceptors, and P2Y11 protein rises in cultured human DRG neurons. Mice and rats lack this gene.'],
+    soma:['Cell body','Sits in the dorsal root ganglion (DRG), next to the spinal cord.'],
+    ends:['Nerve endings','Detect painful heat, pressure, and chemicals in the skin. Tap to send a signal.'],
+    axon:['Axon','Carries pain signals from the skin, past the cell body, to the spinal cord.'],
+    cord:['Spinal cord','Receives pain signals from the DRG and relays them to the brain.'],
+    vessel:['Blood vessel','Blood reaches the DRG and the rest of the body.']
+  };
+  function pick(x,y){
+    var best=null,bd=1e9;
+    circs.forEach(function(c){if(c.a<0.5)return;var d=Math.hypot(c.x-x,c.y-y);if(d<14&&d<bd){bd=d;best={k:c.ntrk?'ntrk':'circ',x:c.x,y:c.y,rr:9}}});
+    recs.forEach(function(r){if(r.a<0.5||r.x==null)return;var d=Math.hypot(r.x-x,r.y-y);if(d<14&&d<bd){bd=d;best={k:'rec',x:r.x,y:r.y,rr:11}}});
+    if(best)return best;
+    if(x>cord.x)return {k:'cord'};
+    var e0=path[0];if(Math.hypot(e0.x-x,e0.y-y)<0.12*W||x<0.1*W&&y>0.6*H)return {k:'ends'};
+    if(Math.hypot(soma.x-x,soma.y-y)<soma.r)return {k:'soma'};
+    for(var i=0;i<path.length;i+=3){if(Math.hypot(path[i].x-x,path[i].y-y)<10)return {k:'axon'}}
+    return null;
+  }
+  function pos(e){var r=cv.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}}
+  function showTip(h,p){if(!h){tip.style.opacity=0;return}var L=labels[h.k];tip.innerHTML='<b>'+L[0]+'</b>'+L[1];tip.style.left=Math.min(Math.max(p.x,110),W-110)+'px';tip.style.top=Math.max(p.y,70)+'px';tip.style.opacity=1}
+  cv.addEventListener('mousemove',function(e){if(openPin)return;mouse=pos(e);hover=pick(mouse.x,mouse.y);showTip(hover,mouse);if(reduce)render()});
+  cv.addEventListener('mouseleave',function(){hover=null;showTip(null)});
+  cv.addEventListener('click',function(e){touring=false;var p=pos(e);closeCard();var h=pick(p.x,p.y);showTip(h,p);hover=h;if(!h||h.k==='ends'||h.k==='axon')fire();if(reduce)render()});
+  fig.addEventListener('pointerdown',function(){touring=false});
+  fig.addEventListener('keydown',function(e){touring=false;if(e.key==='Escape')closeCard()});
+
+  /* ---------- Loop ---------- */
+  function visible(){var r=stage.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<window.innerHeight&&!document.hidden}
+  var ORDER=['base','opioid','next'],lastF=0;
+  function loop(now){
+    if(now-lastF>1500){fire();lastF=now}
+    if(touring&&now-modeSince>6000&&visible()){var i=ORDER.indexOf(mode);if(i<2)setMode(ORDER[i+1]);else touring=false}
+    draw(now);requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize',layout);
+  window.addEventListener('hashchange',function(){setTimeout(layout,0)});
+  layout();setMode('base');
+  if(!reduce)requestAnimationFrame(loop);else render();
+})();
+</script>
+<script>
+(function(){
+  var views = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.main a'));
+  function show(){
+    var id = (location.hash || '#home').slice(1);
+    var target = document.getElementById(id);
+    if (!target || !target.hasAttribute('data-view')) id = 'home';
+    views.forEach(function(v){ v.hidden = (v.id !== id); });
+    links.forEach(function(a){
+      if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current','page');
+      else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', show);
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  function top(){ window.scrollTo(0,0); }
+  window.addEventListener('load', function(){ top(); setTimeout(top, 60); setTimeout(top, 250); });
+  show();
+})();
+</script>
+
+
+</body>
+</html>
