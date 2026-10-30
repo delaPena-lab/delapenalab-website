@@ -154,6 +154,7 @@ ol.pubs li,ul.rlist li,.chapters div{overflow-wrap:anywhere}
 ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:10px}
 ul.alumni{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px 24px;color:var(--muted)}
 ul.alumni b{color:var(--ink);font-weight:600}
+h3.grp{font-size:21px;font-weight:600;color:var(--ink)}
 .logo-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;display:flex;align-items:center;justify-content:center}
 .logo-box img{width:100%;max-width:420px;height:auto}
 ul.team .ini{width:100%;aspect-ratio:1/1;border-radius:14px;background:var(--ph);color:var(--ph-ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:30px;margin-bottom:6px}
@@ -345,14 +346,14 @@ ul.team span{font-size:14px;color:var(--muted)}
       <li><img src="img/campomayor.jpg" alt="" width="400" height="600"><b>Bon Campomayor</b><span>Postdoctoral Fellow</span></li>
       <li><img src="img/demeter.jpg" alt="" width="512" height="600"><b>Jenna Demeter</b><span>Research Scientist</span></li>
       <li><img src="img/koch.jpg" alt="" width="403" height="600"><b>Maddy Koch</b><span>PhD Student</span></li>
-      <li><img src="img/leyrita.jpg" alt="" width="480" height="600"><b>Quisha Leyrita</b><span>Visiting Research Scholar</span></li>
-      <li><img src="img/montoya.jpg" alt="" width="480" height="600"><b>Jeanette Montoya</b><span>Undergraduate</span></li>
-      <li><div class="ini" aria-hidden="true">IE</div><b>Ibrahim Eldenawi</b><span>Undergraduate</span></li>
-      <li><div class="ini" aria-hidden="true">MB</div><b>Manuel Bustillos Lopez</b><span>Undergraduate</span></li>
+      <li><img src="img/leyrita.jpg" alt="" width="480" height="600"><b>Quisha Leyrita</b><span>MS Student</span></li>
+      <li><div class="ini" aria-hidden="true">GF</div><b>Gianluca Fuggiti</b><span>Medical Student</span></li>
       <li><img src="img/madison.jpg" alt="" width="180" height="267" style="object-position:50% 48%"><b>Madison Hochrein</b><span>Medical Student</span></li>
       <li><img src="img/sean.jpg" alt="" width="180" height="267"><b>Sean McNally</b><span>Medical Student</span></li>
       <li><div class="ini" aria-hidden="true">GS</div><b>Gracie Swensen</b><span>Medical Student</span></li>
-      <li><div class="ini" aria-hidden="true">GF</div><b>Gianluca Fuggiti</b><span>Medical Student</span></li>
+      <li><div class="ini" aria-hidden="true">MB</div><b>Manuel Bustillos Lopez</b><span>Undergraduate</span></li>
+      <li><div class="ini" aria-hidden="true">IE</div><b>Ibrahim Eldenawi</b><span>Undergraduate</span></li>
+      <li><img src="img/montoya.jpg" alt="" width="480" height="600"><b>Jeanette Montoya</b><span>Undergraduate</span></li>
     </ul>
   </div></div>
 
@@ -469,7 +470,9 @@ ul.team span{font-size:14px;color:var(--muted)}
 
   <div class="section alt"><div class="wrap stack" style="gap:28px">
     <h2>Lab members</h2>
-    <div class="people">
+    <div class="stack" style="gap:16px">
+      <h3 class="grp">Postdoc and research staff</h3>
+      <div class="people">
       <div class="person"><img class="avatar" src="img/campomayor.jpg" alt="Nicole Bon A. Campomayor" width="400" height="600"><div class="who">
         <h3>Nicole Bon A. Campomayor, MS, PhD</h3><span class="role">Postdoctoral Fellow</span>
         <p>Bon investigates the neuromolecular mechanisms that drive chronic pain, with the long-term goal of contributing to non-addictive pain therapeutics.</p>
@@ -481,7 +484,12 @@ ul.team span{font-size:14px;color:var(--muted)}
         <p>Jenna harnesses the rich information contained within human transcriptomic data and employs complementary wet lab approaches to identify cellular mechanisms and therapeutic targets of various chronic pain conditions.</p>
         <details class="bio"><summary>Full bio</summary><p>Jenna grew up in Springfield, Ohio, where she began to appreciate the intricacies of disease, including its cellular basis and multifactorial influences. Jenna further developed her fascination with the cellular and molecular underpinnings of physiology and pathophysiology at the University of Tennessee, Knoxville. She pursued a bachelor's in Biochemistry and Cellular and Molecular Biology and contextualized cellular phenomena in a broader social context through a Public Health minor. There Jenna also gained a deeper understanding of metabolic and nutritional influences on physiology and disease while pursuing a master's in Biomedical Nutrition Science. Her undergraduate and graduate research focused on the interplay of transcriptional and metabolic processes on cellular differentiation and metabolic states, specifically in adipose tissues.</p></details>
       </div></div>
+      </div>
+    </div>
 
+    <div class="stack" style="gap:16px">
+      <h3 class="grp">Graduate students</h3>
+      <div class="people">
       <div class="person"><img class="avatar" src="img/koch.jpg" alt="Maddy Koch" width="403" height="600"><div class="who">
         <h3>Maddy Koch</h3><span class="role">PhD Student</span>
         <p>Maddy characterizes circular RNAs in the dorsal root ganglia and how opioid exposure changes them. She is first author of the lab's 2026 PAIN Editor's Choice paper on the circRNA landscape of human DRG.</p>
@@ -489,23 +497,18 @@ ul.team span{font-size:14px;color:var(--muted)}
       </div></div>
 
       <div class="person"><img class="avatar" src="img/leyrita.jpg" alt="Quisha Jessen Leyrita" width="480" height="600"><div class="who">
-        <h3>Quisha Jessen Leyrita</h3><span class="role">Visiting Research Scholar</span>
+        <h3>Quisha Jessen Leyrita</h3><span class="role">MS Student (visiting, MSU-IIT)</span>
         <p>Quisha is a Registered Chemist and a graduate student at Mindanao State University-Iligan Institute of Technology (MSU-IIT). Her work focuses on drug repurposing.</p>
         <details class="bio"><summary>Full bio</summary><p>Quisha is a Registered Chemist whose lifelong fascination with chemical interactions has evolved into a dedicated research career. Originally from Butuan City, Philippines, she earned her undergraduate degree in Chemistry from Mindanao State University-Iligan Institute of Technology (MSU-IIT).</p><p>Currently a graduate student at MSU-IIT and a visiting research scholar at the University of New Mexico Health Sciences Center, Quisha's work primarily focuses on drug repurposing, where she leverages her expertise in computational and bioinorganic chemistry to discover new therapeutic potentials for existing compounds.</p></details>
       </div></div>
+      </div>
+    </div>
 
-      <div class="person"><img class="avatar" src="img/montoya.jpg" alt="Jeanette Montoya" width="480" height="600"><div class="who">
-        <h3>Jeanette Montoya</h3><span class="role">Undergraduate, Biochemistry</span>
-        <p>Jeanette is an Albuquerque native and a Biochemistry major at UNM working toward medical school.</p>
-        <details class="bio"><summary>Full bio</summary><p>Jeanette is an Albuquerque native through and through, born here, raised here, and fully convinced that nowhere else will ever feel like home. She grew up surrounded by New Mexico sunsets, family, and a whole lot of farming, so staying here for the long run just makes sense to her. She first fell in love with science at Bosque Preparatory School, where hands-on labs and science-heavy coursework hooked her early. Research appeals to her because it's the perfect mix of curiosity, problem-solving, and getting to actually do things, not just read about them. When she's not in class, Jeanette's usually exploring her city, hanging out with the people (and dogs) she loves, or finding new ways to stay connected to the community she plans to be part of forever.</p></details>
-      </div></div>
-
-      <div class="person"><div class="avatar" aria-hidden="true">IE</div><div class="who">
-        <h3>Ibrahim Eldenawi</h3><span class="role">Undergraduate</span>
-      </div></div>
-
-      <div class="person"><div class="avatar" aria-hidden="true">MB</div><div class="who">
-        <h3>Manuel Bustillos Lopez</h3><span class="role">Undergraduate</span>
+    <div class="stack" style="gap:16px">
+      <h3 class="grp">Medical students</h3>
+      <div class="people">
+      <div class="person"><div class="avatar" aria-hidden="true">GF</div><div class="who">
+        <h3>Gianluca Fuggiti</h3><span class="role">Medical Student</span>
       </div></div>
 
       <div class="person"><img class="avatar" src="img/madison.jpg" alt="Madison Hochrein" width="180" height="267" style="object-position:50% 48%"><div class="who">
@@ -523,10 +526,26 @@ ul.team span{font-size:14px;color:var(--muted)}
       <div class="person"><div class="avatar" aria-hidden="true">GS</div><div class="who">
         <h3>Gracie Swensen</h3><span class="role">Medical Student</span>
       </div></div>
+      </div>
+    </div>
 
-      <div class="person"><div class="avatar" aria-hidden="true">GF</div><div class="who">
-        <h3>Gianluca Fuggiti</h3><span class="role">Medical Student</span>
+    <div class="stack" style="gap:16px">
+      <h3 class="grp">Undergraduate students</h3>
+      <div class="people">
+      <div class="person"><div class="avatar" aria-hidden="true">MB</div><div class="who">
+        <h3>Manuel Bustillos Lopez</h3><span class="role">Undergraduate</span>
       </div></div>
+
+      <div class="person"><div class="avatar" aria-hidden="true">IE</div><div class="who">
+        <h3>Ibrahim Eldenawi</h3><span class="role">Undergraduate</span>
+      </div></div>
+
+      <div class="person"><img class="avatar" src="img/montoya.jpg" alt="Jeanette Montoya" width="480" height="600"><div class="who">
+        <h3>Jeanette Montoya</h3><span class="role">Undergraduate, Biochemistry</span>
+        <p>Jeanette is an Albuquerque native and a Biochemistry major at UNM working toward medical school.</p>
+        <details class="bio"><summary>Full bio</summary><p>Jeanette is an Albuquerque native through and through, born here, raised here, and fully convinced that nowhere else will ever feel like home. She grew up surrounded by New Mexico sunsets, family, and a whole lot of farming, so staying here for the long run just makes sense to her. She first fell in love with science at Bosque Preparatory School, where hands-on labs and science-heavy coursework hooked her early. Research appeals to her because it's the perfect mix of curiosity, problem-solving, and getting to actually do things, not just read about them. When she's not in class, Jeanette's usually exploring her city, hanging out with the people (and dogs) she loves, or finding new ways to stay connected to the community she plans to be part of forever.</p></details>
+      </div></div>
+      </div>
     </div>
 
     <div class="stack" style="gap:14px;padding-top:12px">
